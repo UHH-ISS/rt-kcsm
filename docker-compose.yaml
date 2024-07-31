@@ -1,0 +1,9 @@
+services:
+  rtkcsm:
+    build: .
+    image: git.informatik.uni-hamburg.de:4567/iss/projects/sovereign/rt-kcsm/open-source:latest
+    restart: always
+
+    ports:
+      - 8080:8080 # Web interface
+      - 9000:9000 # TCP ingest port for Tenzir

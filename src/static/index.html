@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RT-KCSM | Scenario Graphs</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <style>
+        html,
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        :root {
+            --text-color: #fefefe;
+            --background-color: #222;
+            --secondary-background-color: #444;
+            --accent-color: #064ca8;
+            --select-color: hsla(0,0%,100%,.05);
+            --border-color: #888;
+        }
+
+        main {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            display: grid;
+            grid-template-areas:
+                "sidebar header"
+                "sidebar graph";
+            grid-template-columns: auto 1fr;
+            grid-template-rows: auto 1fr;
+        }
+
+        .sidebar {
+            resize: horizontal;
+            display: grid;
+            grid-template-rows: auto auto 1fr;
+            min-width: 150px;
+            overflow: auto;
+            grid-area: sidebar;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .sidebar .title {
+            font-size: 18px;
+        }
+
+        .sidebar .title,
+        .sidebar .controls {
+            margin: 10px;
+        }
+
+        .sidebar .controls .button {
+            background-color: var(--secondary-background-color);
+            font-size: 16px;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 20px;
+            border: none;
+            color: var(--text-color);
+            margin: 5px;
+        }
+
+        .sidebar .controls .button:hover {
+            background-color: var(--accent-color);
+        }
+
+        .sidebar .controls .simplify {
+            padding: 10px 5px;
+        }
+
+        .sidebar .controls input[type="checkbox"] {
+            accent-color: var(--accent-color);
+        }
+
+        .sidebar .controls input[type="checkbox"],
+        .sidebar .controls input[type="checkbox"]+label {
+            cursor: pointer;
+        }
+
+        .sidebar .list {
+            overflow: auto;
+        }
+
+        .sidebar .list .graph {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            grid-gap: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .sidebar .list .graph:hover {
+            background-color: var(--select-color);
+        }
+
+        .sidebar .list .id {
+            font-weight: bold;
+        }
+
+        .sidebar .list .relevance {
+            font-style: italic;
+            text-align: left;
+        }
+
+        .header {
+            grid-area: header;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header .title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        .graph-wrapper {
+            position: relative;
+            grid-area: graph;
+        }
+
+        .graph-wrapper .graph {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1;
+            padding: 10px;
+            overflow: auto;
+        }
+
+        .modal .wrapper {
+            display: grid;
+            width: 100%;
+            height: 100%;
+            justify-items: center;
+            align-content: center;
+        }
+
+        .modal .content {
+            background-color: var(--background-color);
+            max-width: 500px;
+            width: 100%;
+            border-radius: 20px;
+        }
+
+        .modal .content .content-wrapper {
+            margin: 25px;
+        }
+
+        .modal .button {
+            background-color: var(--secondary-background-color);
+            color: var(--text-color);
+            border: none;
+            border-radius: 25px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .modal .button:hover,
+        .modal .button:active {
+            background-color: var(--accent-color);
+        }
+
+        .modal .modal-header {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+        }
+
+        .modal .modal-header .close {
+            height: 35px;
+            width: 35px;
+            font-size: 24px;
+            color: var(--border-color);
+            border-radius: 50px;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            background: transparent;
+        }
+
+        .modal .modal-header .close:hover,
+        .modal .modal-header .close:active {
+            background: var(--secondary-background-color);
+        }
+
+        .modal .modal-header .close span {
+            display: block;
+            margin-top: -5px;
+        }
+
+        .modal.closed {
+            display: none;
+        }
+
+        .modal .hosts {
+            gap: 5px;
+            display: grid;
+            grid-auto-flow: row;
+            margin-bottom: 40px;
+        }
+
+        .modal .hosts .host,
+        .modal .create-host {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal .create-host input,
+        .modal .create-host select {
+            background-color: transparent;
+            color: var(--text-color);
+            font-size: 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            padding: 8px 5px;
+        }
+
+        .modal .modal-header .title {
+            font-weight: bold;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="modal closed">
+        <div class="wrapper">
+            <div class="content">
+                <div class="content-wrapper">
+                    <div class="modal-header">
+                        <p class="title">Host Risks</p>
+                        <button class="close">
+                            <span>𐄂</span>
+                        </button>
+                    </div>
+                    <div class="hosts"></div>
+                    <div class="create-host">
+                        <input class="address" placeholder="IP address" type="input">
+                        <select class="riskLevel">
+                            <option value="0.5">low</option>
+                            <option value="1" selected>normal</option>
+                            <option value="1.5">high</option>
+                        </select>
+                        <button class="button">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <main>
+        <div class="sidebar">
+            <h2 class="title">Scenario Graphs (<span class="graph-count"></span>)</h2>
+            <div class="controls">
+                <button class="button refresh">Refresh</button>
+                <button class="button reset">Reset</button>
+                <button class="button hosts">Configure Hosts</button>
+                <div class="simplify">
+                    <input type="checkbox" id="simplify-button">
+                    <label for="simplify-button">Group public addresses</label>
+                </div>
+            </div>
+            <div class="list"></div>
+        </div>
+        <div class="header">
+            <p class="title">Scenario Graph #<span class="graph-id"></span></p>
+        </div>
+        <div class="graph-wrapper">
+            <div class="graph"></div>
+        </div>
+        <script src="bundle.js"></script>
+    </main>
+</body>
+
+</html>

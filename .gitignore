@@ -1,0 +1,15 @@
+.DS_Store
+
+/data/
+/src/graphs/
+/src/graphs.json
+cpu_profile*.pprof
+/src/rtkcsm*
+*.csv
+__debug_bin*
+
+# Web
+/src/web/node_modules
+/src/web/dist/
+/src/static/*.js
+/src/static/*.js.map
