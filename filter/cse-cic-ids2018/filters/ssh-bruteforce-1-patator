@@ -1,0 +1,8 @@
+((ip.src == 13.58.98.64 &&
+ip.dst ==  172.31.69.25 &&
+tcp.dstport == 22) ||
+(ip.dst == 13.58.98.64 &&
+ip.src == 172.31.69.25 &&
+tcp.srcport == 22)) &&
+frame.time_utc >= 2018-02-14T18:01:50Z &&
+frame.time_utc <= 2018-02-14T19:32:30Z

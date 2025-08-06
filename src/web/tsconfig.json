@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "lib": [
+      "ES6",
+      "dom"
+    ],
+    "allowJs": true,
+    "sourceMap": true,
+    "declaration": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "rollup.config.js"
+  ]
+}

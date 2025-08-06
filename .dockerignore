@@ -1,0 +1,16 @@
+/data/**
+/src/rtkcsm*
+/src/cpu_profile*.pprof
+/src/graphs.json
+/src/graphs/
+/src/static/*.js
+/src/static/*.js.map
+/src/web/node_modules/**
+/src/web/dist/**
+/evaluation/**
+/filter/**
+**/.DS_Store
+**/.gitignore
+**/.Dockerfile
+**/.git
+**/.vscode

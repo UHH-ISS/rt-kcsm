@@ -1,0 +1,1 @@
+find data/alerts -name "*.json" -type f -print0 | xargs -0 gzip -k -N -f

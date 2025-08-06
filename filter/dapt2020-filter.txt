@@ -1,0 +1,41 @@
+0. Monday: Benign
+
+1. Tuesday: Scan on 192.168.3.29 (206.207.50.35) -> public
+- Filter: ip.src == 206.207.50.50
+* Anomaly: Not all nmap scans are seen as they are not captured by the router.
+
+2. Wednesday: -> public
+- Filter: (ip.src == 206.207.50.50 && tcp.dstport == 9002) || ip.dst == 206.207.50.50 && tcp.dstport == 1936
+- Filter (all): ip.addr == 206.207.50.50
+* Anomaly:
+  - Also enumerate files in cgi-bin directory using dirbuster directory-list-lowercase-2.3: https://github.com/drtychai/wordlists/blob/master/dirbuster/directory-list-lowercase-2.3-medium.txt
+
+3. Thursday: -> private
+  - SSH/Lateral Movement: ip.dst == 192.168.3.30 && ip.src == 192.168.3.29 && tcp.port == 22
+  - Nmap Scanning: (ip.addr == 192.168.3.30 && ip.addr == 192.168.3.29 && (tcp.flags.syn == 1 && !tcp.options.sack_perm || icmp)) && frame.time_utc >= "2019-07-18 19:47:37.093586000Z" && frame.time_utc <= "2019-07-18 19:48:06.819007000Z"
+  - FTP: 
+  - MySQL: ip.dst == 192.168.3.30 && ip.src == 192.168.3.29 && tcp.port == 3306 && frame.time_utc >= "2019-07-18 19:47:37.093729000Z" && frame.time_utc <= "2019-07-19 04:32:03.913965000Z"
+  - DNS Zone Transfer: ip.src == 192.168.3.29 && tcp.port == 53 && frame.time_utc >= "2019-07-18T19:47:38Z" && frame.time_utc <= "2019-07-18T22:16:12Z"
+  - SMB CVE: smb && frame.time_utc >= "2019-07-19 01:14:32Z" && frame.time_utc <= "2019-07-19 01:24:32Z"
+  - Shell: (ip.addr == 192.168.3.29 || ip.addr == 192.168.3.30) && tcp.port == 4444 -> There is no traffic (only a single SYN connection establishment with a TCP RST); Not an attack yet
+
+Public dataset:
+  - Command injection (targeting DAVM /vulnerablities/exec for reverse shell (expose bash via netcat and listen on port 4444)) from 192.168.3.34: http.request.full_uri == "http://192.168.3.29:9002/vulnerabilities/exec/" && frame.time_utc >= "2019-07-19 03:41:29.505489000Z" && frame.time_utc <= "2019-07-19 04:04:16.341200000Z"
+
+  * Anomaly: Different time than described
+4. Friday: -> public
+  - Command injection (same as previous day): http.request.full_uri == "http://192.168.3.29:9002/vulnerabilities/exec/" && frame.time_utc >= "2019-07-20 02:55:04.691505000Z" && frame.time_utc <= "2019-07-20 03:38:26.111247000Z"
+  - SQL Injection (not documented): tcp.port == 9002 && http.request.uri.path == "/vulnerabilities/sqli/" && frame.time_utc >= "2019-07-20 03:36:43.412472000Z" && frame.time_utc <= "2019-07-20 04:04:17.531020000Z"
+  - FTP (port 4444) data exfil attempt. No real data transmitted: ip.addr == 192.168.3.29 && tcp.port == 4444 && ip.addr == 206.207.50.50 && frame.time_utc >= "2019-07-19 22:18:04.611562000Z" && frame.time_utc <= "2019-07-19 22:34:41.986855000Z"
+  - Reverse shell: ip.addr == 192.168.3.34 && ip.addr == 192.168.3.29 && tcp.port == 4444 && frame.time >= "2019-07-20 04:52:23.207135000+0200"
+   
+  
+  Anomalies:
+  * FTP upload to 206.207.50.50 port 21 (FTP) contains pcap files (probably not as an attack)
+  * SQL injection not mentioned
+  * 
+
+
+
+CIC-IDS2018
+With SUIRCATA alerts: 846322743

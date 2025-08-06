@@ -1,0 +1,24 @@
+.DS_Store
+
+log.txt
+/src/graphs/
+cpu_profile*.pprof
+mem_profile*.pprof
+timeAll.dot
+/src/rtkcsm*
+*.csv
+*.json
+*.pdf
+__debug_bin*
+
+# Web
+/src/web/node_modules
+/src/web/dist/
+/src/static/*.js
+/src/static/*.js.map
+!/src/web/package*.json
+!/src/web/tsconfig.json
+
+# Data
+!/evaluation/data/results/**/**.json
+!/evaluation/data/results/**/**.csv

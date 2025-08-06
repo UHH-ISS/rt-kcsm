@@ -1,0 +1,1287 @@
+SPDXVersion: SPDX-2.3
+DataLicense: CC0-1.0
+SPDXID: SPDXRef-DOCUMENT
+DocumentName: .
+DocumentNamespace: https://anchore.com/syft/dir/6547c09a-cc3a-44e4-8749-d7946ee3cf05
+LicenseListVersion: 3.25
+Creator: Organization: Anchore, Inc
+Creator: Tool: syft-1.29.1
+Created: 2025-08-06T10:23:57Z
+
+##### Unpackaged files
+
+FileName: src/web/node_modules/fsevents/fsevents.node
+SPDXID: SPDXRef-File-...node-modules-fsevents-fsevents.node-bc41e282a13ed668
+FileChecksum: SHA1: 0000000000000000000000000000000000000000
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
+
+FileName: src/web/node_modules/@rollup/rollup-darwin-arm64/rollup.darwin-arm64.node
+SPDXID: SPDXRef-File-...rollup.darwin-arm64.node-9d50f22c6be25468
+FileChecksum: SHA1: 0000000000000000000000000000000000000000
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
+
+FileName: evaluation/Pipfile.lock
+SPDXID: SPDXRef-File-evaluation-Pipfile.lock-528745fc3de156b6
+FileType: APPLICATION
+FileChecksum: SHA1: 99f5e5da3f716fb12a515cb6105e296b84146919
+FileChecksum: SHA256: 68bb0d2fb7c9f76072a963d46a9172a4428c8b4f0a1cb539f2d312888a53dcab
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
+
+FileName: filter/filter-eve/go.mod
+SPDXID: SPDXRef-File-filter-filter-eve-go.mod-3564db2a024ca00c
+FileType: TEXT
+FileChecksum: SHA1: 7abde74c0831d5b19d1b41cd2a2125cf22991aea
+FileChecksum: SHA256: 55b9b48229c6b3ea97ef9d86d460259658fbd89d56869c857bb035fa0e4429cc
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
+
+FileName: src/go.mod
+SPDXID: SPDXRef-File-src-go.mod-200b8509fa239065
+FileType: TEXT
+FileChecksum: SHA1: 71920e6e6f40c8e6d633934086afd8d8c698058a
+FileChecksum: SHA256: 303fb7d2243742e1127f9e4ff7728e7ac2be0618a6c2c2a5df73db2d1d32212d
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
+
+FileName: src/web/package-lock.json
+SPDXID: SPDXRef-File-src-web-package-lock.json-d92a1b9e49e5c48e
+FileType: APPLICATION
+FileChecksum: SHA1: 76527164cf792b8b1b03723a87c8caf840aa1c2d
+FileChecksum: SHA256: 0d552f8712645ef8f86a02239ba24cd2bd367233e3d076721f04a49690cee492
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
+
+##### Package: .
+
+PackageName: .
+SPDXID: SPDXRef-DocumentRoot-Directory-.
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+PrimaryPackagePurpose: FILE
+FilesAnalyzed: false
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+
+##### Package: github.com/alexflint/go-arg
+
+PackageName: github.com/alexflint/go-arg
+SPDXID: SPDXRef-Package-go-module-github.com-alexflint-go-arg-0b1e2e23f8ca0db7
+PackageVersion: v1.5.0
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:alexflint:go-arg:v1.5.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:alexflint:go_arg:v1.5.0:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/alexflint/go-arg@v1.5.0
+
+##### Package: github.com/alexflint/go-arg
+
+PackageName: github.com/alexflint/go-arg
+SPDXID: SPDXRef-Package-go-module-github.com-alexflint-go-arg-0efc5b5f1037092b
+PackageVersion: v1.5.1
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /filter/filter-eve/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:alexflint:go-arg:v1.5.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:alexflint:go_arg:v1.5.1:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/alexflint/go-arg@v1.5.1
+
+##### Package: github.com/alexflint/go-scalar
+
+PackageName: github.com/alexflint/go-scalar
+SPDXID: SPDXRef-Package-go-module-github.com-alexflint-go-scalar-8967a8227dd23989
+PackageVersion: v1.2.0
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /filter/filter-eve/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:alexflint:go-scalar:v1.2.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:alexflint:go_scalar:v1.2.0:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/alexflint/go-scalar@v1.2.0
+
+##### Package: github.com/alexflint/go-scalar
+
+PackageName: github.com/alexflint/go-scalar
+SPDXID: SPDXRef-Package-go-module-github.com-alexflint-go-scalar-ea7e325d6fd6d26c
+PackageVersion: v1.2.0
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:alexflint:go-scalar:v1.2.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:alexflint:go_scalar:v1.2.0:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/alexflint/go-scalar@v1.2.0
+
+##### Package: github.com/bytedance/sonic
+
+PackageName: github.com/bytedance/sonic
+SPDXID: SPDXRef-Package-go-module-github.com-bytedance-sonic-6c16d97340cf1dbc
+PackageVersion: v1.13.3
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:bytedance:sonic:v1.13.3:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/bytedance/sonic@v1.13.3
+
+##### Package: github.com/bytedance/sonic/loader
+
+PackageName: github.com/bytedance/sonic/loader
+SPDXID: SPDXRef-Package-go-module-github.com-bytedance-sonic-loader-71e8198385922e57
+PackageVersion: v0.2.4
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:bytedance:sonic\/loader:v0.2.4:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/bytedance/sonic@v0.2.4#loader
+
+##### Package: github.com/cloudwego/base64x
+
+PackageName: github.com/cloudwego/base64x
+SPDXID: SPDXRef-Package-go-module-github.com-cloudwego-base64x-c726ab76443f10f9
+PackageVersion: v0.1.5
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:cloudwego:base64x:v0.1.5:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/cloudwego/base64x@v0.1.5
+
+##### Package: github.com/gabriel-vasile/mimetype
+
+PackageName: github.com/gabriel-vasile/mimetype
+SPDXID: SPDXRef-Package-go-module-github.com-gabriel-vasile-mimetype-3d14dbb4d152b64e
+PackageVersion: v1.4.9
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:gabriel-vasile:mimetype:v1.4.9:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:gabriel_vasile:mimetype:v1.4.9:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:gabriel:mimetype:v1.4.9:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/gabriel-vasile/mimetype@v1.4.9
+
+##### Package: github.com/gin-contrib/cors
+
+PackageName: github.com/gin-contrib/cors
+SPDXID: SPDXRef-Package-go-module-github.com-gin-contrib-cors-8bc5118de3a834aa
+PackageVersion: v1.7.6
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:gin-contrib:cors:v1.7.6:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:gin_contrib:cors:v1.7.6:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:gin:cors:v1.7.6:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/gin-contrib/cors@v1.7.6
+
+##### Package: github.com/gin-contrib/sse
+
+PackageName: github.com/gin-contrib/sse
+SPDXID: SPDXRef-Package-go-module-github.com-gin-contrib-sse-53a1e01772a8d12b
+PackageVersion: v1.1.0
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:gin-contrib:sse:v1.1.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:gin_contrib:sse:v1.1.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:gin:sse:v1.1.0:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/gin-contrib/sse@v1.1.0
+
+##### Package: github.com/gin-gonic/gin
+
+PackageName: github.com/gin-gonic/gin
+SPDXID: SPDXRef-Package-go-module-github.com-gin-gonic-gin-0a2830d471ef5d08
+PackageVersion: v1.10.1
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:gin-gonic:gin:v1.10.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:gin_gonic:gin:v1.10.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:gin:gin:v1.10.1:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/gin-gonic/gin@v1.10.1
+
+##### Package: github.com/go-playground/locales
+
+PackageName: github.com/go-playground/locales
+SPDXID: SPDXRef-Package-go-module-github.com-go-playground-locales-58769865755b3763
+PackageVersion: v0.14.1
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:go-playground:locales:v0.14.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:go_playground:locales:v0.14.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:go:locales:v0.14.1:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/go-playground/locales@v0.14.1
+
+##### Package: github.com/go-playground/universal-translator
+
+PackageName: github.com/go-playground/universal-translator
+SPDXID: SPDXRef-Package-go-module-github.com-go-playground-universal-translator-adaaff60bdd920ad
+PackageVersion: v0.18.1
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:go-playground:universal-translator:v0.18.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:go-playground:universal_translator:v0.18.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:go_playground:universal-translator:v0.18.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:go_playground:universal_translator:v0.18.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:go:universal-translator:v0.18.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:go:universal_translator:v0.18.1:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/go-playground/universal-translator@v0.18.1
+
+##### Package: github.com/go-playground/validator/v10
+
+PackageName: github.com/go-playground/validator/v10
+SPDXID: SPDXRef-Package-go-module-github.com-go-playground-validator-v10-34610e5bda5fd565
+PackageVersion: v10.27.0
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:go-playground:validator\/v10:v10.27.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:go_playground:validator\/v10:v10.27.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:go:validator\/v10:v10.27.0:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/go-playground/validator@v10.27.0#v10
+
+##### Package: github.com/goccy/go-json
+
+PackageName: github.com/goccy/go-json
+SPDXID: SPDXRef-Package-go-module-github.com-goccy-go-json-6d049dfbbb300b19
+PackageVersion: v0.10.5
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:goccy:go-json:v0.10.5:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:goccy:go_json:v0.10.5:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/goccy/go-json@v0.10.5
+
+##### Package: github.com/json-iterator/go
+
+PackageName: github.com/json-iterator/go
+SPDXID: SPDXRef-Package-go-module-github.com-json-iterator-go-718c355320671756
+PackageVersion: v1.1.12
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:json-iterator:go:v1.1.12:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:json_iterator:go:v1.1.12:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:json:go:v1.1.12:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/json-iterator/go@v1.1.12
+
+##### Package: github.com/klauspost/cpuid/v2
+
+PackageName: github.com/klauspost/cpuid/v2
+SPDXID: SPDXRef-Package-go-module-github.com-klauspost-cpuid-v2-586a40424bfab338
+PackageVersion: v2.2.10
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:klauspost:cpuid\/v2:v2.2.10:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/klauspost/cpuid@v2.2.10#v2
+
+##### Package: github.com/kr/text
+
+PackageName: github.com/kr/text
+SPDXID: SPDXRef-Package-go-module-github.com-kr-text-d4c7a3e26c9919d6
+PackageVersion: v0.2.0
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:kr:text:v0.2.0:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/kr/text@v0.2.0
+
+##### Package: github.com/leodido/go-urn
+
+PackageName: github.com/leodido/go-urn
+SPDXID: SPDXRef-Package-go-module-github.com-leodido-go-urn-c34ff0b98ba853ba
+PackageVersion: v1.4.0
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:leodido:go-urn:v1.4.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:leodido:go_urn:v1.4.0:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/leodido/go-urn@v1.4.0
+
+##### Package: github.com/mattn/go-isatty
+
+PackageName: github.com/mattn/go-isatty
+SPDXID: SPDXRef-Package-go-module-github.com-mattn-go-isatty-711e0519cc469294
+PackageVersion: v0.0.20
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:mattn:go-isatty:v0.0.20:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:mattn:go_isatty:v0.0.20:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/mattn/go-isatty@v0.0.20
+
+##### Package: github.com/modern-go/concurrent
+
+PackageName: github.com/modern-go/concurrent
+SPDXID: SPDXRef-Package-go-module-github.com-modern-go-concurrent-c0b2fcfb62de5c8f
+PackageVersion: v0.0.0-20180306012644-bacd9c7ef1dd
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:modern-go:concurrent:v0.0.0-20180306012644-bacd9c7ef1dd:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:modern_go:concurrent:v0.0.0-20180306012644-bacd9c7ef1dd:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:modern:concurrent:v0.0.0-20180306012644-bacd9c7ef1dd:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/modern-go/concurrent@v0.0.0-20180306012644-bacd9c7ef1dd
+
+##### Package: github.com/modern-go/reflect2
+
+PackageName: github.com/modern-go/reflect2
+SPDXID: SPDXRef-Package-go-module-github.com-modern-go-reflect2-51f4802841876dd3
+PackageVersion: v1.0.2
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:modern-go:reflect2:v1.0.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:modern_go:reflect2:v1.0.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:modern:reflect2:v1.0.2:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/modern-go/reflect2@v1.0.2
+
+##### Package: github.com/pelletier/go-toml/v2
+
+PackageName: github.com/pelletier/go-toml/v2
+SPDXID: SPDXRef-Package-go-module-github.com-pelletier-go-toml-v2-bc898cddcf5ce3f9
+PackageVersion: v2.2.4
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:pelletier:go-toml\/v2:v2.2.4:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:pelletier:go_toml\/v2:v2.2.4:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/pelletier/go-toml@v2.2.4#v2
+
+##### Package: github.com/twitchyliquid64/golang-asm
+
+PackageName: github.com/twitchyliquid64/golang-asm
+SPDXID: SPDXRef-Package-go-module-github.com-twitchyliquid64-golang-asm-e2427b9314724841
+PackageVersion: v0.15.1
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:twitchyliquid64:golang-asm:v0.15.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:twitchyliquid64:golang_asm:v0.15.1:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/twitchyliquid64/golang-asm@v0.15.1
+
+##### Package: github.com/ugorji/go/codec
+
+PackageName: github.com/ugorji/go/codec
+SPDXID: SPDXRef-Package-go-module-github.com-ugorji-go-codec-7310d7d4954516df
+PackageVersion: v1.3.0
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:ugorji:go\/codec:v1.3.0:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/github.com/ugorji/go@v1.3.0#codec
+
+##### Package: golang.org/x/arch
+
+PackageName: golang.org/x/arch
+SPDXID: SPDXRef-Package-go-module-golang.org-x-arch-8c67856d28a91338
+PackageVersion: v0.18.0
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:golang:x\/arch:v0.18.0:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/golang.org/x/arch@v0.18.0
+
+##### Package: golang.org/x/crypto
+
+PackageName: golang.org/x/crypto
+SPDXID: SPDXRef-Package-go-module-golang.org-x-crypto-d565ab43359ef5dd
+PackageVersion: v0.40.0
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:go:ssh:v0.40.0:*:*:*:*:go:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/golang.org/x/crypto@v0.40.0
+
+##### Package: golang.org/x/exp
+
+PackageName: golang.org/x/exp
+SPDXID: SPDXRef-Package-go-module-golang.org-x-exp-7ff2a960bc03da88
+PackageVersion: v0.0.0-20250506013437-ce4c2cf36ca6
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:golang:x\/exp:v0.0.0-20250506013437-ce4c2cf36ca6:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/golang.org/x/exp@v0.0.0-20250506013437-ce4c2cf36ca6
+
+##### Package: golang.org/x/net
+
+PackageName: golang.org/x/net
+SPDXID: SPDXRef-Package-go-module-golang.org-x-net-5b4e936e0abc31a6
+PackageVersion: v0.42.0
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:golang:networking:v0.42.0:*:*:*:*:go:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/golang.org/x/net@v0.42.0
+
+##### Package: golang.org/x/sys
+
+PackageName: golang.org/x/sys
+SPDXID: SPDXRef-Package-go-module-golang.org-x-sys-a7e696c0c4292e7d
+PackageVersion: v0.34.0
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:golang:x\/sys:v0.34.0:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/golang.org/x/sys@v0.34.0
+
+##### Package: golang.org/x/text
+
+PackageName: golang.org/x/text
+SPDXID: SPDXRef-Package-go-module-golang.org-x-text-ba5700a7b86f4719
+PackageVersion: v0.27.0
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:golang:text:v0.27.0:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/golang.org/x/text@v0.27.0
+
+##### Package: google.golang.org/protobuf
+
+PackageName: google.golang.org/protobuf
+SPDXID: SPDXRef-Package-go-module-google.golang.org-protobuf-a864e959a3493021
+PackageVersion: v1.36.6
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:google:protobuf:v1.36.6:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/google.golang.org/protobuf@v1.36.6
+
+##### Package: gopkg.in/yaml.v3
+
+PackageName: gopkg.in/yaml.v3
+SPDXID: SPDXRef-Package-go-module-gopkg.in-yaml.v3-4856f36e51aa5fc0
+PackageVersion: v3.0.1
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from go module information: /src/go.mod
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:yaml_project:yaml:v3.0.1:*:*:*:*:go:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:golang/gopkg.in/yaml.v3@v3.0.1
+
+##### Package: @sigma/edge-curve
+
+PackageName: @sigma/edge-curve
+SPDXID: SPDXRef-Package-npm--sigma-edge-curve-844cdfe2859b60bb
+PackageVersion: 3.1.0
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: https://registry.npmjs.org/@sigma/edge-curve/-/edge-curve-3.1.0.tgz
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed node module manifest file: /src/web/package-lock.json
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: MIT
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:\@sigma\/edge-curve:\@sigma\/edge-curve:3.1.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:\@sigma\/edge-curve:\@sigma\/edge_curve:3.1.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:\@sigma\/edge_curve:\@sigma\/edge-curve:3.1.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:\@sigma\/edge_curve:\@sigma\/edge_curve:3.1.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:\@sigma\/edge:\@sigma\/edge-curve:3.1.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:\@sigma\/edge:\@sigma\/edge_curve:3.1.0:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:npm/%40sigma/edge-curve@3.1.0
+
+##### Package: events
+
+PackageName: events
+SPDXID: SPDXRef-Package-npm-events-72b057e1e809c400
+PackageVersion: 3.3.0
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: https://registry.npmjs.org/events/-/events-3.3.0.tgz
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed node module manifest file: /src/web/package-lock.json
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: MIT
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:events:events:3.3.0:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:npm/events@3.3.0
+
+##### Package: graphology
+
+PackageName: graphology
+SPDXID: SPDXRef-Package-npm-graphology-539fb1af4aade0b9
+PackageVersion: 0.26.0
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: https://registry.npmjs.org/graphology/-/graphology-0.26.0.tgz
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed node module manifest file: /src/web/package-lock.json
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: MIT
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology:graphology:0.26.0:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:npm/graphology@0.26.0
+
+##### Package: graphology-layout-forceatlas2
+
+PackageName: graphology-layout-forceatlas2
+SPDXID: SPDXRef-Package-npm-graphology-layout-forceatlas2-2b5972305a8389ef
+PackageVersion: 0.10.1
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: https://registry.npmjs.org/graphology-layout-forceatlas2/-/graphology-layout-forceatlas2-0.10.1.tgz
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed node module manifest file: /src/web/package-lock.json
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: MIT
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology-layout-forceatlas2:graphology-layout-forceatlas2:0.10.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology-layout-forceatlas2:graphology_layout_forceatlas2:0.10.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology_layout_forceatlas2:graphology-layout-forceatlas2:0.10.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology_layout_forceatlas2:graphology_layout_forceatlas2:0.10.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology-layout:graphology-layout-forceatlas2:0.10.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology-layout:graphology_layout_forceatlas2:0.10.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology_layout:graphology-layout-forceatlas2:0.10.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology_layout:graphology_layout_forceatlas2:0.10.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology:graphology-layout-forceatlas2:0.10.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology:graphology_layout_forceatlas2:0.10.1:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:npm/graphology-layout-forceatlas2@0.10.1
+
+##### Package: graphology-layout-noverlap
+
+PackageName: graphology-layout-noverlap
+SPDXID: SPDXRef-Package-npm-graphology-layout-noverlap-98792fb90b361ba9
+PackageVersion: 0.4.2
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: https://registry.npmjs.org/graphology-layout-noverlap/-/graphology-layout-noverlap-0.4.2.tgz
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed node module manifest file: /src/web/package-lock.json
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: MIT
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology-layout-noverlap:graphology-layout-noverlap:0.4.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology-layout-noverlap:graphology_layout_noverlap:0.4.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology_layout_noverlap:graphology-layout-noverlap:0.4.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology_layout_noverlap:graphology_layout_noverlap:0.4.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology-layout:graphology-layout-noverlap:0.4.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology-layout:graphology_layout_noverlap:0.4.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology_layout:graphology-layout-noverlap:0.4.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology_layout:graphology_layout_noverlap:0.4.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology:graphology-layout-noverlap:0.4.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology:graphology_layout_noverlap:0.4.2:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:npm/graphology-layout-noverlap@0.4.2
+
+##### Package: graphology-types
+
+PackageName: graphology-types
+SPDXID: SPDXRef-Package-npm-graphology-types-8639f00c4cfac9e1
+PackageVersion: 0.24.8
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: https://registry.npmjs.org/graphology-types/-/graphology-types-0.24.8.tgz
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed node module manifest file: /src/web/package-lock.json
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: MIT
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology-types:graphology-types:0.24.8:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology-types:graphology_types:0.24.8:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology_types:graphology-types:0.24.8:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology_types:graphology_types:0.24.8:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology:graphology-types:0.24.8:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology:graphology_types:0.24.8:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:npm/graphology-types@0.24.8
+
+##### Package: graphology-utils
+
+PackageName: graphology-utils
+SPDXID: SPDXRef-Package-npm-graphology-utils-a60175d8d2d4778c
+PackageVersion: 2.5.2
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: https://registry.npmjs.org/graphology-utils/-/graphology-utils-2.5.2.tgz
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed node module manifest file: /src/web/package-lock.json
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: MIT
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology-utils:graphology-utils:2.5.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology-utils:graphology_utils:2.5.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology_utils:graphology-utils:2.5.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology_utils:graphology_utils:2.5.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology:graphology-utils:2.5.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:graphology:graphology_utils:2.5.2:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:npm/graphology-utils@2.5.2
+
+##### Package: sigma
+
+PackageName: sigma
+SPDXID: SPDXRef-Package-npm-sigma-0649feee8150fd2d
+PackageVersion: 3.0.2
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: https://registry.npmjs.org/sigma/-/sigma-3.0.2.tgz
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed node module manifest file: /src/web/package-lock.json
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: MIT
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:sigma:sigma:3.0.2:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:npm/sigma@3.0.2
+
+##### Package: web
+
+PackageName: web
+SPDXID: SPDXRef-Package-npm-web-e679bb766faee348
+PackageVersion: UNKNOWN
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed node module manifest file: /src/web/package-lock.json
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:web:web:*:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:npm/web
+
+##### Package: contourpy
+
+PackageName: contourpy
+SPDXID: SPDXRef-Package-python-contourpy-1c4f5a115b7da65a
+PackageVersion: 1.2.1
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed python package manifest file: /evaluation/Pipfile.lock
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-contourpy:python-contourpy:1.2.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-contourpy:python_contourpy:1.2.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_contourpy:python-contourpy:1.2.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_contourpy:python_contourpy:1.2.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:contourpy:python-contourpy:1.2.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:contourpy:python_contourpy:1.2.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-contourpy:contourpy:1.2.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_contourpy:contourpy:1.2.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python-contourpy:1.2.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python_contourpy:1.2.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:contourpy:contourpy:1.2.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:contourpy:1.2.1:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/contourpy@1.2.1
+
+##### Package: cycler
+
+PackageName: cycler
+SPDXID: SPDXRef-Package-python-cycler-53e5fd52ff0a46f1
+PackageVersion: 0.12.1
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed python package manifest file: /evaluation/Pipfile.lock
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-cycler:python-cycler:0.12.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-cycler:python_cycler:0.12.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_cycler:python-cycler:0.12.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_cycler:python_cycler:0.12.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:cycler:python-cycler:0.12.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:cycler:python_cycler:0.12.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-cycler:cycler:0.12.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python-cycler:0.12.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python_cycler:0.12.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_cycler:cycler:0.12.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:cycler:cycler:0.12.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:cycler:0.12.1:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/cycler@0.12.1
+
+##### Package: fonttools
+
+PackageName: fonttools
+SPDXID: SPDXRef-Package-python-fonttools-72ed4059e79aa927
+PackageVersion: 4.53.0
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed python package manifest file: /evaluation/Pipfile.lock
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:fonttools:fonttools:4.53.0:*:*:*:*:python:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/fonttools@4.53.0
+
+##### Package: kiwisolver
+
+PackageName: kiwisolver
+SPDXID: SPDXRef-Package-python-kiwisolver-f6f9bbaa7fbb492f
+PackageVersion: 1.4.5
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed python package manifest file: /evaluation/Pipfile.lock
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-kiwisolver:python-kiwisolver:1.4.5:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-kiwisolver:python_kiwisolver:1.4.5:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_kiwisolver:python-kiwisolver:1.4.5:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_kiwisolver:python_kiwisolver:1.4.5:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:kiwisolver:python-kiwisolver:1.4.5:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:kiwisolver:python_kiwisolver:1.4.5:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-kiwisolver:kiwisolver:1.4.5:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_kiwisolver:kiwisolver:1.4.5:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python-kiwisolver:1.4.5:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python_kiwisolver:1.4.5:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:kiwisolver:kiwisolver:1.4.5:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:kiwisolver:1.4.5:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/kiwisolver@1.4.5
+
+##### Package: matplotlib
+
+PackageName: matplotlib
+SPDXID: SPDXRef-Package-python-matplotlib-3b9f855403c25e4c
+PackageVersion: 3.9.0
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed python package manifest file: /evaluation/Pipfile.lock
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-matplotlib:python-matplotlib:3.9.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-matplotlib:python_matplotlib:3.9.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_matplotlib:python-matplotlib:3.9.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_matplotlib:python_matplotlib:3.9.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:matplotlib:python-matplotlib:3.9.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:matplotlib:python_matplotlib:3.9.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-matplotlib:matplotlib:3.9.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_matplotlib:matplotlib:3.9.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python-matplotlib:3.9.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python_matplotlib:3.9.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:matplotlib:matplotlib:3.9.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:matplotlib:3.9.0:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/matplotlib@3.9.0
+
+##### Package: numpy
+
+PackageName: numpy
+SPDXID: SPDXRef-Package-python-numpy-6edde199bc70aab2
+PackageVersion: 2.0.0
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed python package manifest file: /evaluation/Pipfile.lock
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-numpy:python-numpy:2.0.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-numpy:python_numpy:2.0.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_numpy:python-numpy:2.0.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_numpy:python_numpy:2.0.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python-numpy:2.0.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python_numpy:2.0.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:numpy:python-numpy:2.0.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:numpy:python_numpy:2.0.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-numpy:numpy:2.0.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_numpy:numpy:2.0.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:numpy:2.0.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:numpy:numpy:2.0.0:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/numpy@2.0.0
+
+##### Package: packaging
+
+PackageName: packaging
+SPDXID: SPDXRef-Package-python-packaging-ac830e5cb3498164
+PackageVersion: 24.1
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed python package manifest file: /evaluation/Pipfile.lock
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-packaging:python-packaging:24.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-packaging:python_packaging:24.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_packaging:python-packaging:24.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_packaging:python_packaging:24.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:packaging:python-packaging:24.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:packaging:python_packaging:24.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-packaging:packaging:24.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_packaging:packaging:24.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python-packaging:24.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python_packaging:24.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:packaging:packaging:24.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:packaging:24.1:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/packaging@24.1
+
+##### Package: pandas
+
+PackageName: pandas
+SPDXID: SPDXRef-Package-python-pandas-a358b85c0e57a7f7
+PackageVersion: 2.2.2
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed python package manifest file: /evaluation/Pipfile.lock
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-pandas:python-pandas:2.2.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-pandas:python_pandas:2.2.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_pandas:python-pandas:2.2.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_pandas:python_pandas:2.2.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:pandas:python-pandas:2.2.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:pandas:python_pandas:2.2.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-pandas:pandas:2.2.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python-pandas:2.2.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python_pandas:2.2.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_pandas:pandas:2.2.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:pandas:pandas:2.2.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:pandas:2.2.2:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/pandas@2.2.2
+
+##### Package: pillow
+
+PackageName: pillow
+SPDXID: SPDXRef-Package-python-pillow-5a8e694f7f2d4256
+PackageVersion: 10.3.0
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed python package manifest file: /evaluation/Pipfile.lock
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-pillow:python-pillow:10.3.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-pillow:python_pillow:10.3.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_pillow:python-pillow:10.3.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_pillow:python_pillow:10.3.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:pillow:python-pillow:10.3.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:pillow:python_pillow:10.3.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-pillow:pillow:10.3.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python-pillow:10.3.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python_pillow:10.3.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_pillow:pillow:10.3.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:pillow:pillow:10.3.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:pillow:10.3.0:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/pillow@10.3.0
+
+##### Package: pyparsing
+
+PackageName: pyparsing
+SPDXID: SPDXRef-Package-python-pyparsing-cedacd26b2025bda
+PackageVersion: 3.1.2
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed python package manifest file: /evaluation/Pipfile.lock
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-pyparsing:python-pyparsing:3.1.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-pyparsing:python_pyparsing:3.1.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_pyparsing:python-pyparsing:3.1.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_pyparsing:python_pyparsing:3.1.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:pyparsing:python-pyparsing:3.1.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:pyparsing:python_pyparsing:3.1.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-pyparsing:pyparsing:3.1.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_pyparsing:pyparsing:3.1.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python-pyparsing:3.1.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python_pyparsing:3.1.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:pyparsing:pyparsing:3.1.2:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:pyparsing:3.1.2:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/pyparsing@3.1.2
+
+##### Package: python-dateutil
+
+PackageName: python-dateutil
+SPDXID: SPDXRef-Package-python-python-dateutil-8552c18d21942052
+PackageVersion: 2.9.0.post0
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed python package manifest file: /evaluation/Pipfile.lock
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-dateutil:python-dateutil:2.9.0.post0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-dateutil:python_dateutil:2.9.0.post0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_dateutil:python-dateutil:2.9.0.post0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_dateutil:python_dateutil:2.9.0.post0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python-dateutil:2.9.0.post0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python_dateutil:2.9.0.post0:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/python-dateutil@2.9.0.post0
+
+##### Package: pytz
+
+PackageName: pytz
+SPDXID: SPDXRef-Package-python-pytz-8f64872e48695a90
+PackageVersion: 2024.1
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed python package manifest file: /evaluation/Pipfile.lock
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-pytz:python-pytz:2024.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-pytz:python_pytz:2024.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_pytz:python-pytz:2024.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_pytz:python_pytz:2024.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python-pytz:2024.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python_pytz:2024.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-pytz:pytz:2024.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_pytz:pytz:2024.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:pytz:python-pytz:2024.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:pytz:python_pytz:2024.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:pytz:2024.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:pytz:pytz:2024.1:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/pytz@2024.1
+
+##### Package: six
+
+PackageName: six
+SPDXID: SPDXRef-Package-python-six-1c7fc1f112f84bf9
+PackageVersion: 1.16.0
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed python package manifest file: /evaluation/Pipfile.lock
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-six:python-six:1.16.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-six:python_six:1.16.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_six:python-six:1.16.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_six:python_six:1.16.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python-six:1.16.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python_six:1.16.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-six:six:1.16.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_six:six:1.16.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:six:python-six:1.16.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:six:python_six:1.16.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:six:1.16.0:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:six:six:1.16.0:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/six@1.16.0
+
+##### Package: tzdata
+
+PackageName: tzdata
+SPDXID: SPDXRef-Package-python-tzdata-575e3c34b93730b5
+PackageVersion: 2024.1
+PackageSupplier: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageSourceInfo: acquired package info from installed python package manifest file: /evaluation/Pipfile.lock
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-tzdata:python-tzdata:2024.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-tzdata:python_tzdata:2024.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_tzdata:python-tzdata:2024.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_tzdata:python_tzdata:2024.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python-tzdata:tzdata:2024.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python-tzdata:2024.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python_tzdata:2024.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python_tzdata:tzdata:2024.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:tzdata:python-tzdata:2024.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:tzdata:python_tzdata:2024.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:tzdata:2024.1:*:*:*:*:*:*:*
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:tzdata:tzdata:2024.1:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/tzdata@2024.1
+
+##### Relationships
+
+Relationship: SPDXRef-Package-npm-sigma-0649feee8150fd2d OTHER SPDXRef-File-src-web-package-lock.json-d92a1b9e49e5c48e
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-gin-gonic-gin-0a2830d471ef5d08 OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-alexflint-go-arg-0b1e2e23f8ca0db7 OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-alexflint-go-arg-0efc5b5f1037092b OTHER SPDXRef-File-filter-filter-eve-go.mod-3564db2a024ca00c
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-python-contourpy-1c4f5a115b7da65a OTHER SPDXRef-File-evaluation-Pipfile.lock-528745fc3de156b6
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-python-six-1c7fc1f112f84bf9 OTHER SPDXRef-File-evaluation-Pipfile.lock-528745fc3de156b6
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-npm-graphology-layout-forceatlas2-2b5972305a8389ef OTHER SPDXRef-File-src-web-package-lock.json-d92a1b9e49e5c48e
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-go-playground-validator-v10-34610e5bda5fd565 OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-python-matplotlib-3b9f855403c25e4c OTHER SPDXRef-File-evaluation-Pipfile.lock-528745fc3de156b6
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-gabriel-vasile-mimetype-3d14dbb4d152b64e OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-gopkg.in-yaml.v3-4856f36e51aa5fc0 OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-modern-go-reflect2-51f4802841876dd3 OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-npm-graphology-539fb1af4aade0b9 OTHER SPDXRef-File-src-web-package-lock.json-d92a1b9e49e5c48e
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-gin-contrib-sse-53a1e01772a8d12b OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-python-cycler-53e5fd52ff0a46f1 OTHER SPDXRef-File-evaluation-Pipfile.lock-528745fc3de156b6
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-python-tzdata-575e3c34b93730b5 OTHER SPDXRef-File-evaluation-Pipfile.lock-528745fc3de156b6
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-klauspost-cpuid-v2-586a40424bfab338 OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-go-playground-locales-58769865755b3763 OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-python-pillow-5a8e694f7f2d4256 OTHER SPDXRef-File-evaluation-Pipfile.lock-528745fc3de156b6
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-golang.org-x-net-5b4e936e0abc31a6 OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-bytedance-sonic-6c16d97340cf1dbc OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-goccy-go-json-6d049dfbbb300b19 OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-python-numpy-6edde199bc70aab2 OTHER SPDXRef-File-evaluation-Pipfile.lock-528745fc3de156b6
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-mattn-go-isatty-711e0519cc469294 OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-json-iterator-go-718c355320671756 OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-bytedance-sonic-loader-71e8198385922e57 OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-npm-events-72b057e1e809c400 OTHER SPDXRef-File-src-web-package-lock.json-d92a1b9e49e5c48e
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-python-fonttools-72ed4059e79aa927 OTHER SPDXRef-File-evaluation-Pipfile.lock-528745fc3de156b6
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-ugorji-go-codec-7310d7d4954516df OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-golang.org-x-exp-7ff2a960bc03da88 OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-npm--sigma-edge-curve-844cdfe2859b60bb OTHER SPDXRef-File-src-web-package-lock.json-d92a1b9e49e5c48e
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-python-python-dateutil-8552c18d21942052 OTHER SPDXRef-File-evaluation-Pipfile.lock-528745fc3de156b6
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-npm-graphology-types-8639f00c4cfac9e1 OTHER SPDXRef-File-src-web-package-lock.json-d92a1b9e49e5c48e
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-alexflint-go-scalar-8967a8227dd23989 OTHER SPDXRef-File-filter-filter-eve-go.mod-3564db2a024ca00c
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-gin-contrib-cors-8bc5118de3a834aa OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-golang.org-x-arch-8c67856d28a91338 OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-python-pytz-8f64872e48695a90 OTHER SPDXRef-File-evaluation-Pipfile.lock-528745fc3de156b6
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-npm-graphology-layout-noverlap-98792fb90b361ba9 OTHER SPDXRef-File-src-web-package-lock.json-d92a1b9e49e5c48e
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-python-pandas-a358b85c0e57a7f7 OTHER SPDXRef-File-evaluation-Pipfile.lock-528745fc3de156b6
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-npm-graphology-utils-a60175d8d2d4778c OTHER SPDXRef-File-src-web-package-lock.json-d92a1b9e49e5c48e
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-golang.org-x-sys-a7e696c0c4292e7d OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-google.golang.org-protobuf-a864e959a3493021 OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-python-packaging-ac830e5cb3498164 OTHER SPDXRef-File-evaluation-Pipfile.lock-528745fc3de156b6
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-go-playground-universal-translator-adaaff60bdd920ad OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-golang.org-x-text-ba5700a7b86f4719 OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-pelletier-go-toml-v2-bc898cddcf5ce3f9 OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-modern-go-concurrent-c0b2fcfb62de5c8f OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-leodido-go-urn-c34ff0b98ba853ba OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-cloudwego-base64x-c726ab76443f10f9 OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-python-pyparsing-cedacd26b2025bda OTHER SPDXRef-File-evaluation-Pipfile.lock-528745fc3de156b6
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-kr-text-d4c7a3e26c9919d6 OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-golang.org-x-crypto-d565ab43359ef5dd OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-twitchyliquid64-golang-asm-e2427b9314724841 OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-npm-web-e679bb766faee348 OTHER SPDXRef-File-src-web-package-lock.json-d92a1b9e49e5c48e
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-go-module-github.com-alexflint-go-scalar-ea7e325d6fd6d26c OTHER SPDXRef-File-src-go.mod-200b8509fa239065
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-Package-python-kiwisolver-f6f9bbaa7fbb492f OTHER SPDXRef-File-evaluation-Pipfile.lock-528745fc3de156b6
+RelationshipComment: evident-by: indicates the package's existence is evident by the given file
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-npm--sigma-edge-curve-844cdfe2859b60bb
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-python-contourpy-1c4f5a115b7da65a
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-python-cycler-53e5fd52ff0a46f1
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-npm-events-72b057e1e809c400
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-python-fonttools-72ed4059e79aa927
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-alexflint-go-arg-0b1e2e23f8ca0db7
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-alexflint-go-arg-0efc5b5f1037092b
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-alexflint-go-scalar-8967a8227dd23989
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-alexflint-go-scalar-ea7e325d6fd6d26c
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-bytedance-sonic-6c16d97340cf1dbc
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-bytedance-sonic-loader-71e8198385922e57
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-cloudwego-base64x-c726ab76443f10f9
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-gabriel-vasile-mimetype-3d14dbb4d152b64e
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-gin-contrib-cors-8bc5118de3a834aa
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-gin-contrib-sse-53a1e01772a8d12b
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-gin-gonic-gin-0a2830d471ef5d08
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-go-playground-locales-58769865755b3763
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-go-playground-universal-translator-adaaff60bdd920ad
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-go-playground-validator-v10-34610e5bda5fd565
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-goccy-go-json-6d049dfbbb300b19
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-json-iterator-go-718c355320671756
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-klauspost-cpuid-v2-586a40424bfab338
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-kr-text-d4c7a3e26c9919d6
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-leodido-go-urn-c34ff0b98ba853ba
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-mattn-go-isatty-711e0519cc469294
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-modern-go-concurrent-c0b2fcfb62de5c8f
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-modern-go-reflect2-51f4802841876dd3
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-pelletier-go-toml-v2-bc898cddcf5ce3f9
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-twitchyliquid64-golang-asm-e2427b9314724841
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-github.com-ugorji-go-codec-7310d7d4954516df
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-golang.org-x-arch-8c67856d28a91338
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-golang.org-x-crypto-d565ab43359ef5dd
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-golang.org-x-exp-7ff2a960bc03da88
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-golang.org-x-net-5b4e936e0abc31a6
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-golang.org-x-sys-a7e696c0c4292e7d
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-golang.org-x-text-ba5700a7b86f4719
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-google.golang.org-protobuf-a864e959a3493021
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-go-module-gopkg.in-yaml.v3-4856f36e51aa5fc0
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-npm-graphology-539fb1af4aade0b9
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-npm-graphology-layout-forceatlas2-2b5972305a8389ef
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-npm-graphology-layout-noverlap-98792fb90b361ba9
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-npm-graphology-types-8639f00c4cfac9e1
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-npm-graphology-utils-a60175d8d2d4778c
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-python-kiwisolver-f6f9bbaa7fbb492f
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-python-matplotlib-3b9f855403c25e4c
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-python-numpy-6edde199bc70aab2
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-python-packaging-ac830e5cb3498164
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-python-pandas-a358b85c0e57a7f7
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-python-pillow-5a8e694f7f2d4256
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-python-pyparsing-cedacd26b2025bda
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-python-python-dateutil-8552c18d21942052
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-python-pytz-8f64872e48695a90
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-npm-sigma-0649feee8150fd2d
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-python-six-1c7fc1f112f84bf9
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-python-tzdata-575e3c34b93730b5
+Relationship: SPDXRef-DocumentRoot-Directory-. CONTAINS SPDXRef-Package-npm-web-e679bb766faee348
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-DocumentRoot-Directory-.

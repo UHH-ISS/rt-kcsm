@@ -1,0 +1,30 @@
+services:
+  rtkcsm:
+    build: .
+    image: rtkcsm:latest
+    restart: always
+    depends_on:
+      - tenzir
+    ports:
+      - 8080:8080
+
+  tenzir:
+    image: tenzir/tenzir:latest
+    restart: always
+    pull_policy: always
+    environment:
+      - TENZIR_PLUGINS__PLATFORM__API_KEY=${TENZIR_API_KEY}
+      - TENZIR_PLUGINS__PLATFORM__CONTROL_ENDPOINT=wss://ws.tenzir.app/production
+      - TENZIR_PLUGINS__PLATFORM__TENANT_ID=${TENZIR_TENANT_ID}
+      - TENZIR_ENDPOINT=localhost:5158
+    entrypoint:
+      - tenzir-node
+    volumes:
+      - tenzir-node:/var/lib/tenzir/
+      - tenzir-node:/var/log/tenzir/
+      - tenzir-node:/var/cache/tenzir/
+      - ./data:/data/
+
+volumes:
+  tenzir-node:
+    driver: local

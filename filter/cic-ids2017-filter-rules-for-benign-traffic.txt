@@ -1,0 +1,25 @@
+# Tuesday
+!(ip.addr == 192.168.10.50 && ftp && ip.addr == 172.16.0.1 && frame.time_utc >= "2017-07-04 12:17:57.275011000Z") # FTP Patator
+&& !(ssh && ip.addr == 172.16.0.1) # SSH Patator
+
+# Wednesday
+!(ip.addr == 172.16.0.1 && ip.addr == 192.168.10.50 && (frame.time_utc <= "2017-07-05 13:11:19.000000000Z" && frame.time_utc >= "2017-07-05 12:47:00.000000000Z") && tcp.port == 80) # DoS slowloris
+!(ip.addr == 172.16.0.1 && ip.addr == 192.168.10.50 && (frame.time_utc <= "2017-07-05 13:36:04.416699000Z" && frame.time_utc >= "2017-07-05 12:14:00.000000000Z") && tcp.port == 80) # DoS Slowhttptest
+&& !(ip.addr == 172.16.0.1 && ip.addr == 192.168.10.50 && (frame.time_utc >= "2017-07-05 13:43:23.194704000Z" && frame.time_utc <= "2017-07-05 14:02:17.191698000Z") && tcp.port == 80) # DoS Hulk
+&& !(ip.addr == 172.16.0.1 && ip.addr == 192.168.10.50 && (frame.time_utc >= "2017-07-05 14:10:00.000000000Z" && frame.time_utc <= "2017-07-05 14:24:00.000000000Z") && tcp.port == 80) # DoS Goldeneye
+&& !(tcp.port == 444 && frame.time_utc >= "2017-07-05 18:12:15.650811000Z") # Heartbleed
+
+# Thursday
+!(ip.addr == 192.168.10.50 && http && (frame.time_utc < "2017-07-06 13:01:00.00000000Z" &&  frame.time_utc >= "2017-07-06 12:20:00.00000000Z")) # Web Brute Force
+&& !(ip.addr == 192.168.10.50 && http && (frame.time_utc <= "2017-07-06 13:35:21.116022000Z" && frame.time_utc >= "2017-07-06 13:15:00.00000000Z")) # Web XSS 
+&& !(ip.addr == 192.168.10.50 && http && (frame.time_utc >= "2017-07-06 13:40:22.025267000Z" && frame.time_utc <= "2017-07-06 13:42:50.315309000Z")) # Web SQL Injection
+&& !(ip.addr == 205.174.165.73 && ip.addr == 192.168.10.25 && tcp.stream == 66870) # Cool Disk
+&& !(ip.addr == 205.174.165.73 && ip.addr == 192.168.10.8 && (frame.time_utc >= "2017-07-06 17:19:02.547210000Z" && frame.time_utc <= "2017-07-06 17:43:08.400470000Z")) # 1st Infiltration before 15:00
+
+# Thursday (APT attack)
+!(((ip.addr == 192.168.10.8 and ip.addr == 205.174.165.73) and frame.time_utc > "2017-07-06 17:43:08.400470000Z") or (frame.time_utc >= "2017-07-06 18:05:10.203032000Z" and frame.time_utc <= "2017-07-06 18:45:00.017941000Z" and ((ip.src == 192.168.10.8 and ip.dst == 192.168.10.0/24) or (ip.dst == 192.168.10.8 and ip.src == 192.168.10.0/24)) and (tcp or udp or icmp) and !dns and !ntp))
+
+# Friday
+!((ip.addr == 192.168.10.15 || ip.addr == 192.168.10.9 || ip.addr == 192.168.10.14 || ip.addr == 192.168.10.5 || ip.addr == 192.168.10.8) && ip.addr == 205.174.165.73) # Botnet
+&& !(ip.addr == 172.16.0.1 && ip.addr == 192.168.10.50 && frame.time_utc >= "2017-07-07 16:55:00.0000000Z" &&  frame.time_utc  <= "2017-07-07 18:29:00.0000000Z") # Port scan
+&& !((ip.addr == 172.16.0.1) && ip.addr == 192.168.10.50 && frame.time_utc >= "2017-07-07 18:55:00.0000000Z" &&  frame.time_utc  <= "2017-07-07 19:20:00.0000000Z") # DDoS LOIT

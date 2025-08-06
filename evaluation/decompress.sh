@@ -1,0 +1,1 @@
+gzip -r -d -q -f -k data/alerts/

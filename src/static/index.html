@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scenario Graphs</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        html,
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        :root {
+            --text-color: #222;
+            --secondary-text-color: #6a6a6a;
+            --background-color: #fff;
+            --secondary-background-color: #eeeeee;
+            --accent-color: #0055ff;
+            --select-color: hsla(0, 0%, 0%, 0.05);
+            --border-color: #ddd;
+            --red-color: rgb(214, 0, 0);
+            --blue-color: rgb(86, 86, 255);
+        }
+
+        @media screen and (prefers-color-scheme: dark) {
+            :root {
+                --text-color: #fefefe;
+                --secondary-text-color: #ddd;
+                --background-color: #222;
+                --secondary-background-color: #444;
+                --select-color: hsla(0, 0%, 100%, .05);
+                --border-color: #333;
+                --red-color: rgb(253, 104, 104);
+                --blue-color: rgb(137, 137, 255);
+            }
+        }
+
+        main {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            display: grid;
+            grid-template-areas:
+                "sidebar header alerts"
+                "sidebar graph alerts";
+            grid-template-columns: auto 1fr;
+            grid-template-rows: auto 1fr;
+        }
+
+        .sidebar {
+            resize: horizontal;
+            display: grid;
+            grid-template-rows: auto auto 1fr;
+            min-width: 200px;
+            max-width: 350px;
+            width: 250px;
+            overflow: auto;
+            grid-area: sidebar;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .sidebar .controls {
+            margin: 10px;
+        }
+
+        .header {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            padding: 10px;
+        }
+
+        .sidebar .title,
+        .header .title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .header .title {
+            margin: 0px;
+        }
+
+        .header * {
+            height: min-content;
+            align-self: center;
+        }
+
+        .header .export-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .header .button,
+        .sidebar .button {
+            background-color: var(--secondary-background-color);
+            font-size: 16px;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 20px;
+            border: none;
+            color: var(--text-color);
+        }
+
+        .header .button:not(:disabled):hover,
+        .header .button:not(:disabled):focus,
+        .sidebar .button:focus {
+            background-color: var(--accent-color);
+            color: #fff;
+        }
+
+        .sidebar .controls .button {
+            margin-bottom: 5px;
+        }
+
+        .sidebar .list {
+            overflow: auto;
+        }
+
+        .sidebar .list,
+        .alerts-list {
+            background: linear-gradient(var(--background-color) 30%, rgba(0, 0, 0, 0)), linear-gradient(rgba(0, 0, 0, 0), var(--background-color) 70%) 0 100%, radial-gradient(50% 0, farthest-side, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)), radial-gradient(50% 100%, farthest-side, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)) 0 100%;
+            background: linear-gradient(var(--background-color) 30%, rgba(0, 0, 0, 0)), linear-gradient(rgba(0, 0, 0, 0), var(--background-color) 70%) 0 100%, radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)), radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)) 0 100%;
+            background-repeat: no-repeat;
+            background-color: var(--background-color);
+            background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+            background-attachment: local, local, scroll, scroll;
+        }
+
+        .sidebar .list .graph {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            grid-gap: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            border: none;
+            color: var(--text-color);
+            background: transparent;
+        }
+
+        .sidebar .list .graph:hover,
+        .sidebar .list .graph:focus {
+            background-color: var(--select-color);
+        }
+
+        .sidebar .list .graph.active {
+            background: var(--accent-color);
+            color: #fff;
+        }
+
+        .sidebar .list .id {
+            display: flex;
+            justify-content: start;
+            font-weight: bold;
+        }
+
+        .sidebar .list .relevance {
+            font-style: italic;
+            text-align: left;
+        }
+
+        .header {
+            grid-area: header;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .graph-wrapper {
+            position: relative;
+            grid-area: graph;
+        }
+
+        .graph-wrapper .graph {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+
+        .graph-wrapper .center-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: var(--background-color);
+            border: 1px solid var(--border-color);
+            height: 35px;
+            width: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            display: grid;
+            align-content: start;
+            justify-items: center;
+            padding: 0px;
+            color: var(--text-color);
+        }
+
+        .graph-wrapper .center-button:hover,
+        .graph-wrapper .center-button:focus {
+            background: var(--select-color);
+        }
+
+        .graph-wrapper .alert-preview {
+            position: absolute;
+            display: grid;
+            background-color: var(--background-color);
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+            max-width: 350px;
+            width: 100%;
+            z-index: 1;
+            grid-template-areas:
+                "src-label src stages"
+                "dst-label dst stages"
+                "message message message";
+            grid-template-columns: auto 1fr auto;
+            pointer-events: none;
+            border: 1px solid var(--border-color);
+        }
+
+        .graph-wrapper .alert-preview.hide {
+            display: none;
+        }
+
+        .alerts-list .date-separator summary {
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .alerts-list .alert .stages,
+        .graph-wrapper .alert-preview .stages {
+            grid-area: stages;
+            column-gap: 3px;
+            display: grid;
+            grid-auto-flow: column;
+            width: min-content;
+        }
+
+        .alerts-list .alert .stages .stage,
+        .graph-wrapper .alert-preview .stages .stage {
+            background: #000;
+            border: 1px solid #fff;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: grid;
+            align-content: center;
+            justify-content: center;
+            font-weight: bold;
+            text-align: center;
+            color: #fff;
+        }
+
+        .modal {
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            overflow: auto;
+            background: transparent;
+            border: none;
+        }
+
+        .modal::backdrop {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal .wrapper {
+            background: var(--background-color);
+            border-radius: 25px;
+            margin: 5px;
+            padding: 20px;
+            min-width: min-content;
+            color: var(--text-color);
+        }
+
+        .modal .input {
+            border: 2px solid var(--border-color);
+            border-radius: 25px;
+            position: relative;
+        }
+
+        .modal .input:focus-within {
+            border-color: var(--accent-color);  
+        }
+
+        .modal .input select,
+        .modal .input input {
+            background-color: transparent;
+            color: var(--text-color);
+            font-size: 16px;
+            border: none;
+            padding: 8px 10px 8px 10px;
+            outline: none;
+            width: 100%;
+        }
+
+        .modal .input label {
+            font-size: 16px;
+            color: var(--secondary-text-color);
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s, top 0.3s, font-size 0.3s;
+        }
+
+        .modal .input:focus-within label,
+        .modal .input input:not(:placeholder-shown)+label,
+        .modal .input select+label {
+            top: 3px;
+            font-size: 11px;
+            transform: translateY(0%);
+        }
+
+        .modal .input:focus-within input,
+        .modal .input input:not(:placeholder-shown),
+        .modal .input select {
+            padding: 13px 10px 3px 10px;
+        }
+
+        .modal .button {
+            background-color: var(--secondary-background-color);
+            color: var(--text-color);
+            border: none;
+            border-radius: 25px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .modal .button:hover,
+        .modal .button:focus {
+            background-color: var(--accent-color);
+            color: #fff;
+        }
+
+        .modal .modal-header {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+        }
+
+        .modal .modal-header .close {
+            height: 35px;
+            width: 35px;
+            font-size: 24px;
+            color: var(--text-color);
+            border-radius: 50px;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            background: transparent;
+        }
+
+        .modal .modal-header .close:hover,
+        .modal .modal-header .close:focus {
+            background: var(--secondary-background-color);
+        }
+
+        .modal .modal-header .close span {
+            display: block;
+            margin-top: -5px;
+        }
+
+        .modal .hosts {
+            gap: 5px;
+            display: grid;
+            grid-auto-flow: row;
+            margin: 15px 0px;
+        }
+
+        .modal .hosts .host,
+        .modal .create-host {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal .modal-header .title {
+            font-weight: bold;
+            font-size: 20px;
+            margin: 5px 0px;
+        }
+
+        .alerts-panel {
+            direction: rtl;
+            grid-area: alerts;
+            resize: horizontal;
+            border-left: 1px solid var(--border-color);
+            min-width: fit-content;
+            width: 300px;
+            grid-template-rows: auto 1fr auto;
+            display: grid;
+            overflow: auto;
+        }
+
+        .alerts-panel h2 {
+            font-size: 18px;
+            margin: 8px;
+        }
+
+        .alerts-panel>* {
+            direction: ltr;
+        }
+
+        .alerts-panel .alerts-list {
+            border: none;
+            overflow: auto;
+            padding: 8px;
+        }
+
+        .alerts-panel .alerts-list .alert {
+            margin: 5px 0px;
+            padding: 5px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: grid;
+            grid-template-areas:
+                "src-label src stages"
+                "dst-label dst stages"
+                "message message message"
+                "details details details";
+            grid-template-columns: auto 1fr auto;
+            grid-template-rows: auto auto auto;
+            column-gap: 5px;
+            background: transparent;
+            color: var(--text-color);
+            text-align: start;
+            width: 100%;
+            user-select: text;
+            cursor: text;
+        }
+
+        .alerts-panel .alerts-list .alert:focus-within {
+            border-color: var(--text-color);
+            border-width: 1px;
+            outline: none;
+            background-color: var(--secondary-background-color);
+        }
+
+        .alerts-panel .alerts-list .alert .src,
+        .alerts-panel .alerts-list .alert .src-label,
+        .alerts-panel .alerts-list .alert .dst,
+        .alerts-panel .alerts-list .alert .dst-label,
+        .alerts-panel .alerts-list .alert .message,
+        .alert-preview .src,
+        .alert-preview .src-label,
+        .alert-preview .dst,
+        .alert-preview .dst-label,
+        .alert-preview .message {
+            font-family: monospace;
+            font-size: small;
+        }
+
+        .alerts-panel .alerts-list .alert .src-label,
+        .alerts-panel .alerts-list .alert .dst-label,
+        .alert-preview .src-label,
+        .alert-preview .dst-label {
+            opacity: 0.7;
+        }
+
+        .alerts-panel .alerts-list .alert .src,
+        .alerts-panel .alerts-list .alert .dst,
+        .alert-preview .src,
+        .alert-preview .dst {
+            color: var(--red-color);
+        }
+
+        .alerts-panel .alerts-list .alert .src.internal,
+        .alerts-panel .alerts-list .alert .dst.internal,
+        .alert-preview .src,
+        .alert-preview .dst {
+            color: var(--blue-color);
+        }
+
+        .alerts-panel .alerts-list .alert .src,
+        .alert-preview .src {
+            grid-area: src;
+        }
+
+        .alerts-panel .alerts-list .alert .src-label,
+        .alert-preview .src-label {
+            grid-area: src-label;
+        }
+
+        .alerts-panel .alerts-list .alert .dst,
+        .alert-preview .dst {
+            grid-area: dst;
+        }
+
+        .alerts-panel .alerts-list .alert .dst-label,
+        .alert-preview .dst-label {
+            grid-area: dst-label;
+        }
+
+        .alerts-panel .alerts-list .alert .message,
+        .alert-preview .message {
+            margin-top: 4px;
+            grid-area: message;
+        }
+
+        .alerts-panel .alerts-list .alert .details {
+            grid-area: details;
+        }
+
+        .alerts-panel .alerts-list .alert .details .attributes {
+            padding: 0px;
+            margin: 0px;
+            list-style-type: none;
+        }
+
+        .alerts-panel .alerts-list .alert .details .attributes .attribute {
+            display: grid;
+            column-gap: 10px;
+            grid-template-columns: 1fr auto;
+        }
+
+        .alerts-panel .alerts-list .alert .details .attributes .attribute .key {
+            color: var(--secondary-text-color);
+        }
+    </style>
+</head>
+
+<body>
+    <dialog aria-labelledby="modal-title" class="modal" tabindex="-1">
+        <div class="wrapper">
+            <div class="modal-header">
+                <p id="modal-title" role="heading" class="title">Host Risks</p>
+                <button class="close">
+                    <span>𐄂</span>
+                </button>
+            </div>
+            <div class="hosts" role="list"></div>
+            <form class="create-host">
+                <div class="input">
+                    <input class="address" placeholder=" " type="input" id="modal-ip-address">
+                    <label for="modal-ip-address">IP address</label>
+                </div>
+                <div class="input">
+                    <select class="risk-level" id="modal-risk-level">
+                        <option value="0.5">low</option>
+                        <option value="1" selected>normal</option>
+                        <option value="1.5">high</option>
+                    </select>
+                    <label for="modal-risk-level">Risk</label>
+                </div>
+                <button type="submit" class="button">Add</button>
+            </form>
+        </div>
+    </dialog>
+    <main>
+        <div class="sidebar" role="region">
+            <h2 class="title" role="heading">Scenario Graphs (<span class="graph-count"></span>)</h2>
+            <div class="controls">
+                <button class="button refresh" tabindex="1">Refresh</button>
+                <button class="button reset" tabindex="2">Reset</button>
+                <button class="button hosts" tabindex="3">Configure Hosts</button>
+            </div>
+            <div class="list" role="list"></div>
+        </div>
+        <div class="header">
+            <p class="title" id="scenario-graph-name" role="heading">Scenario Graph #<span class="graph-id"></span></p>
+            <button class="button export-button" tabindex="4" disabled>Export to OCSF</button>
+        </div>
+        <div class="graph-wrapper" role="region" aria-labelledby="scenario-graph-name">
+            <div class="graph" role="application"></div>
+            <button class="center-button" tabindex="5">&#x2316;</button>
+            <div class="alert-preview hide">
+                <div class="stages"></div>
+                <div class="src-label">src:</div>
+                <div class="src"></div>
+                <div class="dst-label">dst:</div>
+                <div class="dst"></div>
+                <div class="message"></div>
+            </div>
+        </div>
+        <div class="alerts-panel" role="region">
+            <h2 role="heading">Alerts</h2>
+            <div class="alerts-list" role="list"></div>
+        </div>
+        <script src="bundle.js"></script>
+    </main>
+</body>
+
+</html>

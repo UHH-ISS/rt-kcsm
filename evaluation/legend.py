@@ -1,0 +1,2 @@
+def draw_legend(ax, ncol=2, labels=None, handles=None, handler_map=None, horizontal_position=0.5, columnspacing=0.8):
+    return ax.legend(handles=handles, labels=labels, loc="lower center", framealpha=0.8, bbox_to_anchor=(horizontal_position, 1.05), handler_map=handler_map, ncol=ncol, fancybox=True, columnspacing=columnspacing, handlelength=1.75, markerscale=1.5, handletextpad=0.4)
