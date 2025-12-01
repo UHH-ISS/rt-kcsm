@@ -8,12 +8,12 @@
     "sigma": "^3.0.2"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^28.0.6",
+    "@rollup/plugin-commonjs": "^29.0.0",
     "@rollup/plugin-json": "^6.1.0",
-    "@rollup/plugin-node-resolve": "^16.0.1",
-    "rollup": "^4.46.2",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "rollup": "^4.53.3",
     "rollup-plugin-polyfill-node": "^0.13.0",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.3"
   },
   "type": "module"
 }

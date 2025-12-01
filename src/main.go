@@ -2,7 +2,6 @@ package main
 
 import (
 	"embed"
-	"fmt"
 	"log"
 	"maps"
 	"os"
@@ -23,18 +22,18 @@ import (
 var assets embed.FS
 
 type configuration struct {
-	TransportFilePath          string             `arg:"--file" help:"Log files from suricata (eve.json) or zeek (JSON format)"`
-	TransportListenAddress     string             `arg:"--listen" help:"TCP Port to listen on for ingesting from Tenzir"`
-	VisualizationListenAddress string             `arg:"--server" help:"Port for web interface for visualization"`
-	ImportGraphsFile           string             `arg:"--import" help:"Import existing graphs from RT-KCSM's 'graphs.json'"`
-	ReaderType                 string             `arg:"--reader" help:"Format for reading from Tenzir/File: 'zeek', 'suricata', 'ocsf', 'suricata-tenzir'"`
-	TransportType              string             `arg:"--transport" help:"Specify whether to use file or TCP for ingestion"`
-	ExportGraphsFile           string             `arg:"--export" help:"File name of exported graphs from RT-KCSM"`
-	HostRisk                   map[string]float32 `arg:"--risk" help:"Define risk score (low=0.5,default=1.0,high=1.5) of an IP address for a host/asset."`
+	TransportFilePath          string             `arg:"--file" help:"filepath of logs from suricata (eve.json) or zeek (JSON format)"`
+	TransportListenAddress     string             `arg:"--listen" help:"TCP port to listen on for alerts"`
+	VisualizationListenAddress string             `arg:"--server" help:"web interface port for visualization"`
+	ImportGraphsFile           string             `arg:"--import" help:"Import existing graphs"`
+	ReaderType                 string             `arg:"--reader" help:"format for reading from transport: 'zeek', 'suricata', 'ocsf', 'suricata-tenzir'" default:"suricata"`
+	TransportType              string             `arg:"--transport" help:"'file', 'stdin', or 'tcp' for ingesting alerts" default:"file"`
+	ExportGraphsFile           string             `arg:"--export" help:"file name of exported graphs from RT-KCSM"`
+	HostRisk                   map[string]float32 `arg:"--risk" help:"set risk score (low=0.5,default=1.0,high=1.5) of an IP address for a host/asset: --risk 10.0.0.1=1.5"`
 	ProfilerOptions            map[string]string  `arg:"--profile" help:"performance profile options: memory=/path/to/file, cpu=/path/to/file, alerts=/path/to/file, graphs=/path/to/file, graph-ranking=/path/to/file, progress=true"`
 	ProfilerGraphID            structure.GraphID  `arg:"--profile-graph-ranking-id" help:"graph id for profiling ranking"`
-	StageWeights               map[string]float32 `arg:"--stage-weight" help:"define custom stage weights (incoming, same-zone, different-zone, outgoing)"`
-	ProfilerLogResolution      int                `arg:"--profile-log-resolution" help:"Resolution of updating alert count" default:"1000"`
+	StageWeights               map[string]float32 `arg:"--stage-weight" help:"set custom stage weights (incoming, same-zone, different-zone, outgoing): --stage-weight incoming=0.1"`
+	ProfilerLogResolution      int                `arg:"--profile-log-resolution" help:"resolution of updating alert count" default:"1000"`
 }
 
 func startCPUProfile(fileName string) *os.File {
@@ -58,7 +57,7 @@ func stopCPUProfile(file *os.File) {
 		if err := file.Close(); err != nil {
 			log.Panic(err)
 		}
-		fmt.Printf("cpu profile written to: %s", file.Name())
+		log.Printf("cpu profile written to: %s\n", file.Name())
 	}
 }
 
@@ -195,6 +194,8 @@ func main() {
 		selectedTransport = &transport.TcpTransport[structure.SimplifiedUKCStage, structure.UKCStage]{
 			ListenAddress: config.TransportListenAddress,
 		}
+	case "stdin":
+		selectedTransport = &transport.StdinTransport[structure.SimplifiedUKCStage, structure.UKCStage]{}
 	default:
 		log.Panic("transport type is not known")
 	}

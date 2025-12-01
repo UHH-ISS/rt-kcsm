@@ -1,6 +1,8 @@
 package visualization
 
 import (
+	"encoding/json"
+	"fmt"
 	"io/fs"
 	"log"
 	"net/http"
@@ -13,8 +15,9 @@ import (
 )
 
 func Start[T structure.Stage, K structure.Stage](listenAddress string, rtkcsm behaviour.RTKCSM[T, K], fileSystem fs.FS) error {
-	server := gin.Default()
+	server := gin.New()
 	server.Use(cors.Default())
+	server.Use(gin.Recovery())
 
 	server.GET("/", func(ctx *gin.Context) {
 		ctx.Redirect(http.StatusTemporaryRedirect, "/web/")
@@ -78,7 +81,12 @@ func Start[T structure.Stage, K structure.Stage](listenAddress string, rtkcsm be
 			format := ctx.Request.URL.Query().Get("format")
 			switch format {
 			case "ocsf":
-				ctx.JSON(http.StatusOK, FromGraphToOCSFIncidentFinding(&preComputedGraph))
+				finding := FromGraphToOCSFIncidentFinding(&preComputedGraph)
+				ctx.JSON(http.StatusOK, finding)
+				findingBytes, err := json.Marshal(finding)
+				if err == nil {
+					fmt.Println(string(findingBytes))
+				}
 			default:
 				ctx.JSON(http.StatusOK, preComputedGraph)
 			}

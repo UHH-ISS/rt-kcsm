@@ -24,11 +24,11 @@ func (transport *TcpTransport[T, K]) Start(rtkcsm behaviour.RTKCSM[T, K], reader
 			return err
 		}
 
-		go transport.hanldeConnection(connection, rtkcsm, reader)
+		go transport.handleConnection(connection, rtkcsm, reader)
 	}
 }
 
-func (transport *TcpTransport[T, K]) hanldeConnection(connection net.Conn, rtkcsm behaviour.RTKCSM[T, K], reader reader.AlertReader[T, K]) error {
+func (transport *TcpTransport[T, K]) handleConnection(connection net.Conn, rtkcsm behaviour.RTKCSM[T, K], reader reader.AlertReader[T, K]) error {
 	defer connection.Close()
 	return reader.ChannelAlerts(rtkcsm, connection)
 }

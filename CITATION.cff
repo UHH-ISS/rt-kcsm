@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+title: >-
+  Real-Time Detection of Multi-Stage Attacks Using Kill
+  Chain State Machines
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Liliana
+    family-names: Kistenmacher
+  - given-names: Anum
+    family-names: Talpur
+  - given-names: Mathias
+    family-names: Fischer
+identifiers:
+  - type: doi
+    value: 10.1109/CNS66487.2025.11194951
+repository-code: https://github.com/UHH-ISS/rt-kcsm
+keywords:
+  - Intrusion detection
+  - Alert correlation
+  - Attack scenario reconstruction
+license: BSD-3-Clause
