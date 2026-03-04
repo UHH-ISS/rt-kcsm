@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "go",
+            "name": "RT-KCSM with CSE-CIC-IDS2018-APT dataset",
+            "request": "launch",
+            "program": "${workspaceFolder}/code/rtkcsm/src/main.go",
+            "args": [
+                "--server", ":8081",
+                "--reader", "zeek",
+                "--file", "${workspaceFolder}/data/alerts/ids2018-apt/notice.json",
+                "--risk", "172.31.69.20=1.5",
+                "--profile", "progress=1"
+            ]
+        }
+    ]
+}

@@ -1,24 +1,23 @@
 .DS_Store
 
-log.txt
-/src/graphs/
 cpu_profile*.pprof
 mem_profile*.pprof
-timeAll.dot
-/src/rtkcsm*
-*.csv
-*.json
+/code/rtkcsm/src/rtkcsm*
+/code/rtkcsm/src/*.csv
+/code/rtkcsm/src/*.json
 *.pdf
 __debug_bin*
 
 # Web
-/src/web/node_modules
-/src/web/dist/
-/src/static/*.js
-/src/static/*.js.map
-!/src/web/package*.json
-!/src/web/tsconfig.json
+/code/rtkcsm/src/web/node_modules
+/code/rtkcsm/src/web/dist/
+/code/rtkcsm/src/static/*.js
+/code/rtkcsm/src/static/*.js.map
+!/code/rtkcsm/src/web/package*.json
+!/code/rtkcsm/src/web/tsconfig.json
 
 # Data
-!/evaluation/data/results/**/**.json
-!/evaluation/data/results/**/**.csv
+/data/**/**.json
+
+# Results
+/results/figures/*.pdf

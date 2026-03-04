@@ -26,7 +26,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build . --tag ghcr.io/${{ env.REPOSITORY }}:latest
+          docker build code/rtkcsm --tag ghcr.io/${{ env.REPOSITORY }}:latest
 
       - name: Push Docker image
         run: |

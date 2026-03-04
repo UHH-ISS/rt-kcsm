@@ -18,7 +18,7 @@ Implementation of [our paper](https://doi.org/10.1109/CNS66487.2025.11194951):
 ## Run using Docker
 
 ```bash
-docker run --rm -v ./evaluation/data/alerts/:/data/ -p 8080:8080 ghcr.io/uhh-iss/rt-kcsm:latest --server :8080 --file /data/ids2018-apt/notice.json --reader zeek
+docker run --rm -v ./data/alerts/:/data/ -p 8080:8080 ghcr.io/uhh-iss/rt-kcsm:latest --server :8080 --file /data/ids2018-apt/notice.json --reader zeek
 ```
 
 CLI options:
@@ -48,37 +48,18 @@ Options:
 
 ## Run experiments
 
+### 1. Install the following prerequisites
+
 Prerequisites:
 - `Golang 1.24`
 - `Node.js 23.11.0`
 - `npm 10.9.2`
-- `Python 3.13`
-- `Jupyter Notebook`
+- `Python 3.13` and `pipenv`
 - `bash` or `zsh`
 
-### 1. Install RT-KCSM from source with Golang
+### 2. Run the evaluation script
 
 ```bash
-cd src/web/
-npm install
-tsc
-rollup -c
-cd ..
-go install .
-cd ..
+./code/evaluation/run-evaluation.sh
 ```
-
-Make sure you have the go binaries folder in your `$PATH` variable.
-
-### 2. Run the evaluation setup
-
-```bash
-cd evaluation
-./run-evaluation.sh
-```
-
-Wait until it has finished. Now run all steps of the Jupyter Notebook(s):
-- `evaluation/performance.ipynb`
-- `evaluation/detection.ipynb`
-
-The result figures are located in `evaluation/figures/`
+The result figures are located in `results/figures/`
