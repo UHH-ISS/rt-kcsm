@@ -78,9 +78,9 @@ measure_performance "${ALERT_FILE}" "suricata" "1000" "${RESULT_DIR}"
 echo "----------------------------"
 echo "Generating figures..."
 
-PIPENV_PIPFILE=code/evaluation/Pipfile pipenv install
-pipenv shell
+export PIPENV_PIPFILE=code/evaluation/Pipfile
+pipenv install
 
 mkdir -p results/figures
-jupyter nbconvert --to notebook --inplace --execute code/evaluation/detection.ipynb
-jupyter nbconvert --to notebook --inplace --execute code/evaluation/performance.ipynb
+pipenv run jupyter nbconvert --to notebook --inplace --execute code/evaluation/detection.ipynb
+pipenv run jupyter nbconvert --to notebook --inplace --execute code/evaluation/performance.ipynb
