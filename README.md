@@ -1,3 +1,6 @@
+[![Paper](https://img.shields.io/badge/CNS66487.2025.11194951-blue?style=flat-rounded&logo=doi&logoColor=flat)](https://doi.org/10.1109/CNS66487.2025.11194951)
+[![Open in Code Ocean](https://codeocean.com/codeocean-assets/badge/open-in-code-ocean.svg)](https://codeocean.com/capsule/2288451/tree)
+
 # Real-Time Kill Chain State Machine (RT-KCSM)
 
 Detect multi-stage attacks by correlating alerts from Intrusion Detection Systems (IDS) to generate scenario graphs.
