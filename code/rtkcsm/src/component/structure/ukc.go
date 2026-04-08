@@ -14,6 +14,7 @@ const (
 	P
 	E
 	O
+	X
 )
 
 func (stage UKCStage) String() string {
@@ -27,6 +28,7 @@ func (stage UKCStage) String() string {
 		P:  "Pivot",
 		E:  "Exfiltration",
 		O:  "Objectives",
+		X:  "Execution",
 	}
 
 	return humanReadableNames[stage]

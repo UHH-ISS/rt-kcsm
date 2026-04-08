@@ -35,6 +35,7 @@ var SimplifiedUkcStageWeights = map[SimplifiedUKCStage]float32{
 	SameZone:      0.25,
 	DifferentZone: 0.30,
 	Outgoing:      0.35,
+	Host:          1.0,
 }
 
 func (stage SimplifiedUKCStage) GetVictim() Direction {
@@ -50,6 +51,7 @@ var ukcStageMapping = map[SimplifiedUKCStage][]UKCStage{
 	SameZone:      {L, S, O},
 	DifferentZone: {P, S, O},
 	Outgoing:      {E, C2, D2},
+	Host:          {X},
 }
 
 func (stage SimplifiedUKCStage) Serialize() byte {

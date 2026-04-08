@@ -3,6 +3,7 @@ package reader
 import (
 	"bufio"
 	"encoding/json"
+	"fmt"
 	"io"
 	"log"
 	"rtkcsm/component/behaviour"
@@ -18,10 +19,16 @@ type OCSFDetectionFinding struct {
 	EvidenceArtifacts  []OCSFEvidenceArtifact `json:"evidences"`
 	Unmapped           suricataLogEntry       `json:"unmapped"`
 	FindingInformation OCSFFindingInformation `json:"finding_info"`
+	Device             OCSFDevice             `json:"device"`
+}
+
+type OCSFDevice struct {
+	IP string `json:"ip"`
 }
 
 type OCSFFindingInformation struct {
 	Description string `json:"desc"`
+	Title       string `json:"title"`
 }
 
 type OCSFEvidenceArtifact struct {
@@ -31,6 +38,11 @@ type OCSFEvidenceArtifact struct {
 
 type OCSFNetworkEndpoint struct {
 	IP string `json:"ip"`
+}
+
+type OCSFDevicePair struct {
+	Source      OCSFDevice
+	Destination OCSFDevice
 }
 
 var DetectionFindingCreateTypeUID = 200401
@@ -51,17 +63,35 @@ func (ocsfAlertReader *OCSFAlertReader[T, K]) ChannelAlerts(rtkcsm behaviour.RTK
 
 		// Check if detection finding is created
 		if detectionFinding.TypeUID == DetectionFindingCreateTypeUID {
+			pairs := []OCSFDevicePair{}
 			timestamp := time.UnixMilli(int64(detectionFinding.EventTime))
 
 			var sourceIP *structure.IPAddress
 			var destinationIP *structure.IPAddress
+			if detectionFinding.Device.IP != "" { // We assume it is a host event when a device is given
+				pairs = append(pairs, OCSFDevicePair{
+					Source:      detectionFinding.Device,
+					Destination: detectionFinding.Device,
+				})
+			} else {
+				for _, evidence := range detectionFinding.EvidenceArtifacts {
+					pairs = append(pairs, OCSFDevicePair{
+						Source: OCSFDevice{
+							IP: evidence.SourceEndpoint.IP,
+						},
+						Destination: OCSFDevice{
+							evidence.DestinationEndpoint.IP,
+						},
+					})
+				}
+			}
 
-			for _, evidence := range detectionFinding.EvidenceArtifacts {
-				if evidence.DestinationEndpoint.IP != "" {
-					ip := structure.ParseIPAddress(evidence.DestinationEndpoint.IP)
+			for _, pair := range pairs {
+				if pair.Destination.IP != "" {
+					ip := structure.ParseIPAddress(pair.Destination.IP)
 					destinationIP = &ip
-				} else if evidence.SourceEndpoint.IP != "" {
-					ip := structure.ParseIPAddress(evidence.SourceEndpoint.IP)
+				} else if pair.Source.IP != "" {
+					ip := structure.ParseIPAddress(pair.Source.IP)
 					sourceIP = &ip
 				}
 
@@ -96,7 +126,7 @@ func (ocsfAlertReader *OCSFAlertReader[T, K]) ChannelAlerts(rtkcsm behaviour.RTK
 						Severity:      severity,
 						Confidence:    confidence,
 						SignatureId:   detectionFinding.Unmapped.Alert.SignatureId,
-						Cause:         detectionFinding.FindingInformation.Description,
+						Cause:         fmt.Sprintf("%s: %s", detectionFinding.FindingInformation.Title, detectionFinding.FindingInformation.Description),
 						Label:         "", // Not applicable for production as it is used for testing
 					}
 
@@ -104,6 +134,8 @@ func (ocsfAlertReader *OCSFAlertReader[T, K]) ChannelAlerts(rtkcsm behaviour.RTK
 					if err != nil {
 						log.Println(err)
 					}
+				} else {
+					log.Printf("error parsing ip address: src: %s, dst: %s\n", pair.Source.IP, pair.Destination.IP)
 				}
 			}
 		}

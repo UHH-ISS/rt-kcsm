@@ -1,0 +1,5 @@
+
+/src/static/*.js
+/src/static/*.js.map
+/src/web/dist/**
+/src/web/node_modules/**

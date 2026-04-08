@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
+    "rootDir": "src",
     "outDir": "dist",
     "lib": [
       "ES6",
-      "dom"
+      "DOM"
     ],
     "allowJs": true,
     "sourceMap": true,

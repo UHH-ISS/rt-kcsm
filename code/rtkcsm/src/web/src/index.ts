@@ -2,6 +2,7 @@ import DirectedGraph from "graphology"
 import FA2Layout from "graphology-layout-forceatlas2/worker"
 import Sigma from "sigma"
 import { EdgeCurvedArrowProgram, DEFAULT_EDGE_CURVATURE, indexParallelEdgesIndex } from "@sigma/edge-curve"
+import { LoopEdgeProgram } from "./LoopEdge"
 
 const graphContainer = document.querySelector(".graph") as HTMLDivElement
 const graphWrapper = document.querySelector(".graph-wrapper") as HTMLDivElement
@@ -20,7 +21,7 @@ const alertDestinationElement = document.querySelector(".alert-preview > .dst") 
 const alertMessageElement = document.querySelector(".alert-preview > .message") as HTMLSpanElement
 const exportToOCSFButton = document.querySelector(".header .export-button") as HTMLButtonElement
 
-const stageNamesToSymbols = {
+const stageNamesToSymbols: { [stageName: string]: string } = {
     "Reconnaissance": "R",
     "Delivery Phase 1": "D1",
     "Delivery Phase 2": "D2",
@@ -30,6 +31,7 @@ const stageNamesToSymbols = {
     "Pivot": "P",
     "Exfiltration": "E",
     "Objectives": "O",
+    "Execution": "X"
 }
 
 const riskLevels = [{
@@ -46,10 +48,11 @@ const riskLevels = [{
 let currentGraphId: Number | null = null
 let focusedAlertId: string | null = null
 
-const graph = new DirectedGraph({ multi: true })
+const graph = new DirectedGraph({ multi: true, allowSelfLoops: true })
 const renderer = new Sigma(graph, graphContainer, {
     edgeProgramClasses: {
         curvedArrow: EdgeCurvedArrowProgram,
+        looped: LoopEdgeProgram,
     },
     enableEdgeEvents: true,
     zIndex: true
@@ -74,7 +77,7 @@ graphWrapper.addEventListener("mousemove", ({ clientX, clientY }) => {
 
         alertStagesElement.innerHTML = ""
 
-        attributes.label.forEach((stageName) => {
+        attributes.label.forEach((stageName: string) => {
             const stageElement = document.createElement("span")
             stageElement.className = "stage"
             stageElement.textContent = stageNamesToSymbols[stageName]
@@ -158,7 +161,7 @@ function renderEdges() {
     // Adapt types and curvature of parallel edges for rendering:
     graph.forEachEdge(
         (
-            edge,
+            edge: any,
             {
                 parallelIndex,
                 parallelMinIndex,
@@ -167,19 +170,27 @@ function renderEdges() {
                 | { parallelIndex: number; parallelMinIndex?: number; parallelMaxIndex: number }
                 | { parallelIndex?: null; parallelMinIndex?: null; parallelMaxIndex?: null },
         ) => {
-            if (typeof parallelMinIndex === "number") {
-                graph.mergeEdgeAttributes(edge, {
-                    type: parallelIndex ? "curvedArrow" : "arrow",
-                    curvature: getCurvature(parallelIndex, parallelMaxIndex),
-                })
-            } else if (typeof parallelIndex === "number") {
-                graph.mergeEdgeAttributes(edge, {
-                    type: "curvedArrow",
-                    curvature: getCurvature(parallelIndex, parallelMaxIndex),
-                })
+            console.log(edge, edge.type)
+
+            if(edge.from !== edge.to) {
+                if (typeof parallelMinIndex === "number") {
+                    graph.mergeEdgeAttributes(edge, {
+                        type: parallelIndex ? "curvedArrow" : "arrow",
+                        curvature: getCurvature(parallelIndex, parallelMaxIndex),
+                    })
+                } else if (typeof parallelIndex === "number") {
+                    graph.mergeEdgeAttributes(edge, {
+                        type: "curvedArrow",
+                        curvature: getCurvature(parallelIndex, parallelMaxIndex),
+                    })
+                } else {
+                    graph.setEdgeAttribute(edge, "type", "arrow")
+                }
             } else {
-                graph.setEdgeAttribute(edge, "type", "arrow")
+                graph.setEdgeAttribute(edge, "type", "looped")
             }
+
+            console.log(edge, edge.type)
         },
     )
 }
@@ -231,7 +242,7 @@ function openGraph(id: number) {
     fetch(`/api/graphs/${encodeURIComponent(String(id))}`)
         .then(response => response.json())
         .then(data => {
-            let nodesDict = {}
+            let nodesDict: {[id: string]: any} = {}
             graph.clear()
             layoutIterations = 0
             layout.start()
@@ -239,7 +250,7 @@ function openGraph(id: number) {
             let lastTimestamp: Date | null = null
             let alertContainer: HTMLElement | null = null
 
-            data.relations.forEach((edge) => {
+            data.relations.forEach((edge: { [key: string]: any }) => {
                 if (!(edge.from in nodesDict)) {
                     graph.addNode(
                         edge.from,
@@ -250,7 +261,8 @@ function openGraph(id: number) {
                             zIndex: edge.from_is_internal ? 2 : 1,
                             x: Math.random(),
                             y: Math.random(),
-                        })
+                        }
+                    )
                     nodesDict[edge.from] = true
                 }
 
@@ -267,7 +279,7 @@ function openGraph(id: number) {
                         })
                     nodesDict[edge.to] = true
                 }
-
+                    
                 graph.addEdgeWithKey(
                     edge.id,
                     edge.from,
@@ -276,16 +288,18 @@ function openGraph(id: number) {
                         label: edge.confirmed_ukc_stages,
                         message: edge.cause,
                         size: edge.severity * 3,
-                        type: "curvedArrow",
                         showLabel: false,
                         zIndex: 1,
-                    })
+                    }
+                )
 
                 let timestamp = new Date(edge.timestamp)
                 if (lastTimestamp == null || timestamp.toDateString() !== lastTimestamp.toDateString()) {
                     alertContainer = addDateSeparator(timestamp)
                 }
-                addAlertToList(edge, alertContainer)
+                if (alertContainer) {
+                    addAlertToList(edge, alertContainer)
+                }
                 lastTimestamp = timestamp
             })
 
@@ -294,15 +308,18 @@ function openGraph(id: number) {
         .catch(error => console.error("Error fetching graph:", error))
 }
 
-const list = document.querySelector(".sidebar .list")
+const list: HTMLDivElement | null = document.querySelector(".sidebar .list")
 
 function refreshGraphs() {
-    list.innerHTML = ""
-    loadGraphs(0)
+    if(list) {
+        list.innerHTML = ""
+        loadGraphs(0)
+    }
 }
 
 function loadGraphs(page: number) {
-    fetch(`/api/graphs?page=${page}`)
+    if(list) {
+        fetch(`/api/graphs?page=${page}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error("Network response was not ok")
@@ -312,7 +329,7 @@ function loadGraphs(page: number) {
         .then(data => {
             graphCountElement.textContent = data.count
 
-            data.graphs.forEach(item => {
+            data.graphs.forEach((item: { [key: string]: any }) => {
                 const graph = document.createElement("button")
                 graph.className = "graph"
                 graph.id = `graph-list-item-${item.id}`
@@ -362,6 +379,7 @@ function loadGraphs(page: number) {
                 }
             }
         })
+    }
 }
 
 function addDateSeparator(timestamp: Date): HTMLElement {
@@ -394,7 +412,7 @@ function addAlertToList(relation: any, parent: HTMLElement) {
     const alertStagesElement = document.createElement("span")
     alertStagesElement.className = "stages"
 
-    relation.confirmed_ukc_stages.forEach((stageName) => {
+    relation.confirmed_ukc_stages.forEach((stageName: string) => {
         const stageElement = document.createElement("span")
         stageElement.className = "stage"
         stageElement.textContent = stageNamesToSymbols[stageName]
@@ -435,7 +453,7 @@ function addAlertToList(relation: any, parent: HTMLElement) {
     detailSummaryElement.textContent = "Details"
     detailsElement.appendChild(detailSummaryElement)
 
-    const attributes = {
+    const attributes: { [key: string]: any } = {
         "Timestamp": new Date(relation.timestamp).toLocaleString(),
         "Count": relation.count,
         "Relevance": relation.computed_host_relevance.toFixed(2)
@@ -528,7 +546,7 @@ function listHosts() {
         }
         return response.json()
     }).then((hosts) => {
-        hosts.forEach((host) => {
+        hosts.forEach((host: { [key: string]: any }) => {
             const hostElement = document.createElement("div")
             hostElement.className = "host"
             hostElement.role = "listitem"
@@ -588,11 +606,11 @@ function downloadOCSFExport() {
     })
 }
 
-document.querySelector(".sidebar .controls .refresh").addEventListener("click", refreshGraphs)
-document.querySelector(".sidebar .controls .reset").addEventListener("click", resetGraphs)
-document.querySelector(".sidebar .controls .hosts").addEventListener("click", openHostModal)
-document.querySelector(".modal .close").addEventListener("click", closeHostModal)
-document.querySelector(".modal .create-host .button").addEventListener("click", createHost)
+document.querySelector(".sidebar .controls .refresh")?.addEventListener("click", refreshGraphs)
+document.querySelector(".sidebar .controls .reset")?.addEventListener("click", resetGraphs)
+document.querySelector(".sidebar .controls .hosts")?.addEventListener("click", openHostModal)
+document.querySelector(".modal .close")?.addEventListener("click", closeHostModal)
+document.querySelector(".modal .create-host .button")?.addEventListener("click", createHost)
 centerViewButton.addEventListener("click", centerView)
 exportToOCSFButton.addEventListener("click", downloadOCSFExport)
 
