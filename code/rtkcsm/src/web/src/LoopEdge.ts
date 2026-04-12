@@ -1,12 +1,12 @@
-import { createEdgeArrowHeadProgram, EdgeProgram, ProgramInfo } from "sigma/rendering"
+import { EdgeProgram, ProgramInfo } from "sigma/rendering"
 import { NodeDisplayData, EdgeDisplayData, RenderParams } from "sigma/types"
 import { floatColor } from "sigma/utils"
 import { Attributes } from "graphology-types"
 
 const VERTEX_SHADER_SOURCE = `
-    attribute vec2 a_position;
-    attribute vec4 a_color;
-    attribute vec4 a_id;
+    attribute vec2  a_position;
+    attribute vec4  a_color;
+    attribute vec4  a_id;
     uniform mat3 u_matrix;
     varying vec4 v_color;
 
@@ -46,10 +46,10 @@ export class LoopEdgeProgram<
 > extends EdgeProgram<(typeof UNIFORMS)[number], N, E, G> {
     getDefinition() {
         return {
-            VERTICES: 64,
+            VERTICES: 64 * 2,
             VERTEX_SHADER_SOURCE,
             FRAGMENT_SHADER_SOURCE,
-            METHOD: WebGLRenderingContext.LINE_STRIP,
+            METHOD: WebGLRenderingContext.TRIANGLE_STRIP,
             UNIFORMS,
             ATTRIBUTES: [
                 { name: "a_position", size: 2, type: WebGLRenderingContext.FLOAT },
@@ -61,31 +61,31 @@ export class LoopEdgeProgram<
 
     processVisibleItem(edgeIndex: number, startIndex: number, sourceData: NodeDisplayData, targetData: NodeDisplayData, data: EdgeDisplayData) {
         const array = this.array
-        const radius = 0.002 * sourceData.size
+        const innerRadius = 0.002 * sourceData.size
+        const lineWidth = data.size / 2 * 0.0015
+        const outerRadius = innerRadius + lineWidth
         const color = floatColor(data.color)
         const points = 63
 
         const x = sourceData.x
-        const y = sourceData.y + radius 
-
-        let prevPx = x
-        let prevPy = y
-        let lastPx = x
-        let lastPy = y
+        const y = sourceData.y + innerRadius
 
         for (let i = 0; i <= points; i++) {
             const angle = (i / points) * Math.PI * 2
-            const px = x + Math.cos(angle) * radius
-            const py = y + Math.sin(angle) * radius
-            array[startIndex++] = px
-            array[startIndex++] = py
+            const innerX = x + Math.cos(angle) * innerRadius
+            const innerY = y + Math.sin(angle) * innerRadius
+            const outerX = x + Math.cos(angle) * outerRadius
+            const outerY = y + Math.sin(angle) * outerRadius
+
+            array[startIndex++] = innerX
+            array[startIndex++] = innerY
             array[startIndex++] = color
             array[startIndex++] = edgeIndex
 
-            prevPx = lastPx
-            prevPy = lastPy
-            lastPx = px
-            lastPy = py
+            array[startIndex++] = outerX
+            array[startIndex++] = outerY
+            array[startIndex++] = color
+            array[startIndex++] = edgeIndex
         }
         
         return startIndex

@@ -10,13 +10,14 @@ type StateMachine[T Stage, K Stage] interface {
 var ukcPrecedingStages = map[UKCStage][]UKCStage{
 	R:  {},
 	D1: {R},
-	D2: {R, D1},
-	C2: {L, P, C2, D1, D2},
-	L:  {L, P, S, C2, D1, D2},
-	P:  {L, P, C2, D1, D2},
-	S:  {L, S, C2, D1, D2},
-	E:  {L, P, D1, D2, O, E},
-	O:  {L, P, D1, D2, O, E},
+	D2: {R, D1, X},
+	C2: {L, P, C2, D1, D2, X},
+	L:  {L, P, S, C2, D1, D2, X},
+	P:  {L, P, C2, D1, D2, X},
+	S:  {L, S, C2, D1, D2, X},
+	E:  {L, P, D1, D2, O, E, X},
+	O:  {L, P, D1, D2, O, E, X},
+	X:  {L, P, D1, D2, O, E, X},
 }
 
 type UKCStateMachine[T Stage] struct{}

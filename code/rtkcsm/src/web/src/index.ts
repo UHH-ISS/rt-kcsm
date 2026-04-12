@@ -3,6 +3,7 @@ import FA2Layout from "graphology-layout-forceatlas2/worker"
 import Sigma from "sigma"
 import { EdgeCurvedArrowProgram, DEFAULT_EDGE_CURVATURE, indexParallelEdgesIndex } from "@sigma/edge-curve"
 import { LoopEdgeProgram } from "./LoopEdge"
+import { EdgeArrowProgram } from "sigma/rendering"
 
 const graphContainer = document.querySelector(".graph") as HTMLDivElement
 const graphWrapper = document.querySelector(".graph-wrapper") as HTMLDivElement
@@ -45,7 +46,7 @@ const riskLevels = [{
     value: 1.5
 }]
 
-let currentGraphId: Number | null = null
+let currentGraphId: number | null = null
 let focusedAlertId: string | null = null
 
 const graph = new DirectedGraph({ multi: true, allowSelfLoops: true })
@@ -53,6 +54,7 @@ const renderer = new Sigma(graph, graphContainer, {
     edgeProgramClasses: {
         curvedArrow: EdgeCurvedArrowProgram,
         looped: LoopEdgeProgram,
+        default: EdgeArrowProgram,
     },
     enableEdgeEvents: true,
     zIndex: true
@@ -170,9 +172,9 @@ function renderEdges() {
                 | { parallelIndex: number; parallelMinIndex?: number; parallelMaxIndex: number }
                 | { parallelIndex?: null; parallelMinIndex?: null; parallelMaxIndex?: null },
         ) => {
-            console.log(edge, edge.type)
-
-            if(edge.from !== edge.to) {
+            if(graph.source(edge) === graph.target(edge)) {
+                graph.setEdgeAttribute(edge, "type", "looped")
+            } else {
                 if (typeof parallelMinIndex === "number") {
                     graph.mergeEdgeAttributes(edge, {
                         type: parallelIndex ? "curvedArrow" : "arrow",
@@ -186,11 +188,7 @@ function renderEdges() {
                 } else {
                     graph.setEdgeAttribute(edge, "type", "arrow")
                 }
-            } else {
-                graph.setEdgeAttribute(edge, "type", "looped")
             }
-
-            console.log(edge, edge.type)
         },
     )
 }
@@ -276,7 +274,8 @@ function openGraph(id: number) {
                             zIndex: edge.to_is_internal ? 2 : 1,
                             x: Math.random(),
                             y: Math.random(),
-                        })
+                        }
+                    )
                     nodesDict[edge.to] = true
                 }
                     

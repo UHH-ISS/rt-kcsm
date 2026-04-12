@@ -66,8 +66,6 @@ func (ocsfAlertReader *OCSFAlertReader[T, K]) ChannelAlerts(rtkcsm behaviour.RTK
 			pairs := []OCSFDevicePair{}
 			timestamp := time.UnixMilli(int64(detectionFinding.EventTime))
 
-			var sourceIP *structure.IPAddress
-			var destinationIP *structure.IPAddress
 			if detectionFinding.Device.IP != "" { // We assume it is a host event when a device is given
 				pairs = append(pairs, OCSFDevicePair{
 					Source:      detectionFinding.Device,
@@ -75,67 +73,56 @@ func (ocsfAlertReader *OCSFAlertReader[T, K]) ChannelAlerts(rtkcsm behaviour.RTK
 				})
 			} else {
 				for _, evidence := range detectionFinding.EvidenceArtifacts {
-					pairs = append(pairs, OCSFDevicePair{
-						Source: OCSFDevice{
-							IP: evidence.SourceEndpoint.IP,
-						},
-						Destination: OCSFDevice{
-							evidence.DestinationEndpoint.IP,
-						},
-					})
+					if evidence.SourceEndpoint.IP != "" && evidence.DestinationEndpoint.IP != "" {
+						pairs = append(pairs, OCSFDevicePair{
+							Source: OCSFDevice{
+								IP: evidence.SourceEndpoint.IP,
+							},
+							Destination: OCSFDevice{
+								evidence.DestinationEndpoint.IP,
+							},
+						})
+					} else {
+						log.Printf("error parsing an ip address of an network alert: src: %s, dst: %s\n", evidence.SourceEndpoint.IP, evidence.DestinationEndpoint.IP)
+					}
 				}
 			}
 
 			for _, pair := range pairs {
-				if pair.Destination.IP != "" {
-					ip := structure.ParseIPAddress(pair.Destination.IP)
-					destinationIP = &ip
-				} else if pair.Source.IP != "" {
-					ip := structure.ParseIPAddress(pair.Source.IP)
-					sourceIP = &ip
+				sourceIP := structure.ParseIPAddress(pair.Source.IP)
+				destinationIP := structure.ParseIPAddress(pair.Destination.IP)
+
+				confidence := float32(0)
+				switch detectionFinding.ConfidenceID {
+				case 1: // Low
+					confidence = 0.33
+				case 2: // Medium
+					confidence = 0.66
+				default: // High
+					confidence = 1
 				}
 
-				if sourceIP == nil {
-					sourceIP = destinationIP
-				} else if destinationIP == nil {
-					destinationIP = sourceIP
+				severity := float32(detectionFinding.SeverityId)
+				if severity >= 1 && severity <= 6 { // Severity ids are from 1 to 6
+					severity = severity / 6
+				} else { // If unknown or other we map it to 1
+					severity = 1
 				}
 
-				if sourceIP != nil && destinationIP != nil {
-					confidence := float32(0)
-					switch detectionFinding.ConfidenceID {
-					case 1: // Low
-						confidence = 0.33
-					case 2: // Medium
-						confidence = 0.66
-					default: // High
-						confidence = 1
-					}
+				alert := structure.Alert{
+					Timestamp:     timestamp,
+					SourceIP:      sourceIP,
+					DestinationIP: destinationIP,
+					Severity:      severity,
+					Confidence:    confidence,
+					SignatureId:   detectionFinding.Unmapped.Alert.SignatureId,
+					Cause:         fmt.Sprintf("%s: %s", detectionFinding.FindingInformation.Title, detectionFinding.FindingInformation.Description),
+					Label:         "", // Not applicable for production as it is used for testing
+				}
 
-					severity := float32(detectionFinding.SeverityId)
-					if severity >= 1 && severity <= 6 { // Severity ids are from 1 to 6
-						severity = severity / 6
-					} else { // If unknown or other we map it to 1
-						severity = 1
-					}
-
-					alert := structure.Alert{
-						Timestamp:     timestamp,
-						SourceIP:      *sourceIP,
-						DestinationIP: *destinationIP,
-						Severity:      severity,
-						Confidence:    confidence,
-						SignatureId:   detectionFinding.Unmapped.Alert.SignatureId,
-						Cause:         fmt.Sprintf("%s: %s", detectionFinding.FindingInformation.Title, detectionFinding.FindingInformation.Description),
-						Label:         "", // Not applicable for production as it is used for testing
-					}
-
-					err := rtkcsm.AddAlert(alert)
-					if err != nil {
-						log.Println(err)
-					}
-				} else {
-					log.Printf("error parsing ip address: src: %s, dst: %s\n", pair.Source.IP, pair.Destination.IP)
+				err := rtkcsm.AddAlert(alert)
+				if err != nil {
+					log.Println(err)
 				}
 			}
 		}

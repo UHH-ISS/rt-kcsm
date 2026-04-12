@@ -50,6 +50,8 @@ func ParseIPAddress(address string) IPAddress {
 		if ipBytes.IsUnspecified() {
 			ipAddress[16] |= IS_UNSPECIFIED
 		}
+	} else {
+		ipAddress[16] |= IS_UNSPECIFIED
 	}
 
 	return ipAddress

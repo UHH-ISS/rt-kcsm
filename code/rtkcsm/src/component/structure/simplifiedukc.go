@@ -97,9 +97,9 @@ var errSimplifiedUkcStageMapperNotFound = errors.New("not found")
 var simplifiedUkcPrecedingStages = map[SimplifiedUKCStage][]SimplifiedUKCStage{
 	Incoming:      {},
 	Host:          {Incoming, SameZone, Host, DifferentZone},
-	SameZone:      {Incoming, SameZone, Host, DifferentZone, Outgoing},
-	DifferentZone: {Incoming, SameZone, Host, DifferentZone, Outgoing},
-	Outgoing:      {Incoming, SameZone, Host, DifferentZone, Outgoing},
+	SameZone:      {Incoming, SameZone, Host, DifferentZone, Outgoing, Host},
+	DifferentZone: {Incoming, SameZone, Host, DifferentZone, Outgoing, Host},
+	Outgoing:      {Incoming, SameZone, Host, DifferentZone, Outgoing, Host},
 }
 
 func (SimplifiedUKCStageMapper) DetermineStage(alert Alert) (SimplifiedUKCStage, error) {

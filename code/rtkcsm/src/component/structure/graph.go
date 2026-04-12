@@ -241,7 +241,7 @@ func (g *Graph[T, K]) append(r DirectedRelation[T]) {
 		g.ComputedRelevance += (relationRelevance - existingMaxStageRelevance) * relation.MetaStage.GetWeight()
 	}
 
-	g.updatePredecessor(r.SrcNode, r.SrcNode.IsInternal() && r.DstNode.IsInternal(), r.SrcNode.IsInternal())
+	g.updatePredecessor(r.SrcNode, r.SrcNode.IsInternal() && r.DstNode.IsInternal() && !r.DstNode.Equal(r.SrcNode), r.SrcNode.IsInternal())
 	g.updatePredecessor(r.DstNode, false, false)
 }
 
