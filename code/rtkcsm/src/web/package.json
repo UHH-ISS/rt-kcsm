@@ -5,16 +5,16 @@
     "graphology": "^0.26.0",
     "graphology-layout-forceatlas2": "^0.10.1",
     "graphology-layout-noverlap": "^0.4.2",
-    "sigma": "^3.0.2"
+    "sigma": "^3.0.3"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-commonjs": "^29.0.2",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@types/events": "^3.0.3",
-    "rollup": "^4.59.0",
+    "rollup": "^4.60.4",
     "rollup-plugin-polyfill-node": "^0.13.0",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.3"
   },
   "type": "module"
 }

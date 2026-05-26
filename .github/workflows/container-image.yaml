@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Build and Push Container Image
 
 on:
   push:
@@ -8,6 +8,9 @@ on:
 
 jobs:
   build-and-push:
+    permissions:
+      contents: read
+      packages: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -24,10 +27,10 @@ jobs:
         run: |
           echo "REPOSITORY=${GITHUB_REPOSITORY@L}" >> ${GITHUB_ENV}
 
-      - name: Build Docker image
+      - name: Build Container image
         run: |
           docker build code/rtkcsm --tag ghcr.io/${{ env.REPOSITORY }}:latest
 
-      - name: Push Docker image
+      - name: Push Container image
         run: |
           docker push ghcr.io/${{ env.REPOSITORY }}:latest
