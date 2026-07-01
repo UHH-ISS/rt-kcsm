@@ -1,0 +1,52 @@
+name: ""
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [linux, darwin, windows]
+        arch: [amd64, arm64]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - uses: actions/setup-go@v6
+        name: Install Golang
+        with:
+          go-version: "1.25"
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - run: mkdir -p /tmp/builds/
+        name: Create build output directory
+
+      - name: Build web app
+        working-directory: code/rtkcsm/src/web
+        run: |
+          npm install
+          npx tsc
+          npx rollup -c
+
+      - run: go build -o /tmp/builds/rtkcsm-${{ matrix.os }}-${{ matrix.arch }} .
+        name: Build ${{ matrix.os }} ${{ matrix.arch }}
+        working-directory: code/rtkcsm/src/
+        env:
+          GOOS: ${{ matrix.os }}
+          GOARCH: ${{ matrix.arch }}
+          CGO_ENABLED: 0
+
+      - name: Upload assets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload "$GITHUB_REF_NAME" /tmp/builds/* --clobber
