@@ -27,7 +27,7 @@ type configuration struct {
 	VisualizationListenAddress string             `arg:"--server" help:"web interface port for visualization"`
 	ImportGraphsFile           string             `arg:"--import" help:"Import existing graphs"`
 	ReaderType                 string             `arg:"--reader" help:"format for reading from transport: 'zeek', 'suricata', 'ocsf', 'suricata-tenzir'" default:"suricata"`
-	TransportType              string             `arg:"--transport" help:"'file', 'stdin', or 'tcp' for ingesting alerts" default:"file"`
+	TransportType              string             `arg:"--transport" help:"'file', 'stdin', 'unix', or 'tcp' for ingesting alerts" default:"file"`
 	ExportGraphsFile           string             `arg:"--export" help:"file name of exported graphs from RT-KCSM"`
 	HostRisk                   map[string]float32 `arg:"--risk" help:"set risk score (low=0.5,default=1.0,high=1.5) of an IP address for a host/asset: --risk 10.0.0.1=1.5"`
 	ProfilerOptions            map[string]string  `arg:"--profile" help:"performance profile options: memory=/path/to/file, cpu=/path/to/file, alerts=/path/to/file, graphs=/path/to/file, graph-ranking=/path/to/file, progress=true"`
@@ -142,7 +142,7 @@ func main() {
 		structure.SimplifiedUkcStageWeights[structure.NewSimplifiedUKCStageFromString(stage)] = weight
 	}
 
-	rtkcsm := behaviour.NewIncrementalRTKCSM(128, structure.NewSimplifiedUKCStageMapper(), structure.NewUKCStateMachine[structure.SimplifiedUKCStage](), &profilerOptions)
+	rtkcsm := behaviour.NewIncrementalRTKCSM(structure.NewSimplifiedUKCStageMapper(), structure.NewUKCStateMachine[structure.SimplifiedUKCStage](), &profilerOptions)
 
 	startTime := time.Now()
 	if config.ImportGraphsFile != "" {
@@ -196,6 +196,12 @@ func main() {
 		}
 	case "stdin":
 		selectedTransport = &transport.StdinTransport[structure.SimplifiedUKCStage, structure.UKCStage]{}
+	case "unix":
+		if config.TransportFilePath != "" {
+			selectedTransport = &transport.UnixSocketTransport[structure.SimplifiedUKCStage, structure.UKCStage]{
+				FilePath: config.TransportFilePath,
+			}
+		}
 	default:
 		log.Panic("transport type is not known")
 	}

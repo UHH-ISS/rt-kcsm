@@ -22,7 +22,7 @@ func (stage UKCStage) String() string {
 		R:  "Reconnaissance",
 		D1: "Delivery Phase 1",
 		D2: "Delivery Phase 2",
-		C2: "Command&Control",
+		C2: "Command & Control",
 		L:  "Lateral Movement",
 		S:  "Discovery",
 		P:  "Pivot",

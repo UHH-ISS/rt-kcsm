@@ -26,7 +26,7 @@ const stageNamesToSymbols: { [stageName: string]: string } = {
     "Reconnaissance": "R",
     "Delivery Phase 1": "D1",
     "Delivery Phase 2": "D2",
-    "Command&Control": "C2",
+    "Command & Control": "C2",
     "Lateral Movement": "L",
     "Discovery": "S",
     "Pivot": "P",
@@ -212,6 +212,18 @@ function centerView() {
     )
 }
 
+function computeXYCoordinateFromString(str: string): [Number, Number] {
+  let hashA = 0
+  let hashB = 0
+
+  for (let i = 0; i < str.length; i++) {
+    hashA = ((hashA << 5) - hashA) + str.charCodeAt(i)
+    hashB = ((hashB << 3) - hashA) + str.charCodeAt(i)
+  }
+
+  return [hashA % 10, hashB % 10]
+}
+
 function openGraph(id: number) {
     centerView()
     focusedAlertId = null
@@ -250,6 +262,8 @@ function openGraph(id: number) {
 
             data.relations.forEach((edge: { [key: string]: any }) => {
                 if (!(edge.from in nodesDict)) {
+                    const [x, y] = computeXYCoordinateFromString(edge.from)
+
                     graph.addNode(
                         edge.from,
                         {
@@ -257,14 +271,16 @@ function openGraph(id: number) {
                             color: edge.from_is_internal ? "blue" : "red",
                             size: edge.from_is_internal ? 30 : 10,
                             zIndex: edge.from_is_internal ? 2 : 1,
-                            x: Math.random(),
-                            y: Math.random(),
+                            x: x,
+                            y: y,
                         }
                     )
                     nodesDict[edge.from] = true
                 }
 
                 if (!(edge.to in nodesDict)) {
+                    const [x, y] = computeXYCoordinateFromString(edge.from)
+
                     graph.addNode(
                         edge.to,
                         {
@@ -272,8 +288,8 @@ function openGraph(id: number) {
                             color: edge.to_is_internal ? "blue" : "red",
                             size: edge.to_is_internal ? 30 : 10,
                             zIndex: edge.to_is_internal ? 2 : 1,
-                            x: Math.random(),
-                            y: Math.random(),
+                            x: x,
+                            y: y,
                         }
                     )
                     nodesDict[edge.to] = true
@@ -384,7 +400,7 @@ function loadGraphs(page: number) {
 function addDateSeparator(timestamp: Date): HTMLElement {
     const dateElement = document.createElement("details")
     dateElement.className = "date-separator"
-    dateElement.role = "lisitem"
+    dateElement.role = "listitem"
 
     const dateLabelElement = document.createElement("summary")
     dateLabelElement.textContent = timestamp.toLocaleDateString()

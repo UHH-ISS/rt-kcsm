@@ -79,7 +79,7 @@ func (ocsfAlertReader *OCSFAlertReader[T, K]) ChannelAlerts(rtkcsm behaviour.RTK
 								IP: evidence.SourceEndpoint.IP,
 							},
 							Destination: OCSFDevice{
-								evidence.DestinationEndpoint.IP,
+								IP: evidence.DestinationEndpoint.IP,
 							},
 						})
 					} else {

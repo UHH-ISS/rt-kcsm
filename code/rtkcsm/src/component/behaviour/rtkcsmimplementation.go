@@ -21,7 +21,7 @@ type RTKCSMImplementation[T structure.Stage, K structure.Stage] struct {
 	stateMachine    structure.StateMachine[T, K]
 }
 
-func NewIncrementalRTKCSM[T structure.Stage, K structure.Stage](workerCount int, stageMapper structure.StageMapper[T], stateMachine structure.StateMachine[T, K], profilerOptions *structure.ProfilerOptions) *RTKCSMImplementation[T, K] {
+func NewIncrementalRTKCSM[T structure.Stage, K structure.Stage](stageMapper structure.StageMapper[T], stateMachine structure.StateMachine[T, K], profilerOptions *structure.ProfilerOptions) *RTKCSMImplementation[T, K] {
 	var sortedGraphs structure.SortedMap[structure.GraphID, float32]
 	sortedGraphs = structure.NewWriteEfficientSortedMap[structure.GraphID, float32](true)
 	if profilerOptions.Has(structure.GraphRankingProfilerOptionFlag) {
@@ -35,6 +35,7 @@ func NewIncrementalRTKCSM[T structure.Stage, K structure.Stage](workerCount int,
 		sortedGraphs:    sortedGraphs,
 		profilerOptions: profilerOptions,
 		stageMapper:     stageMapper,
+		stateMachine:    stateMachine,
 	}
 
 	return &rtkcsm

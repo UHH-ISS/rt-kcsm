@@ -35,7 +35,6 @@ func ParseIPAddress(address string) IPAddress {
 		ipAddress[11] = ipBytes[11]
 		ipAddress[12] = ipBytes[12]
 		ipAddress[13] = ipBytes[13]
-		ipAddress[13] = ipBytes[13]
 		ipAddress[14] = ipBytes[14]
 		ipAddress[15] = ipBytes[15]
 

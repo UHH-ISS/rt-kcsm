@@ -13,6 +13,19 @@
                 "--risk", "172.31.69.20=1.5",
                 "--profile", "progress=1"
             ]
+        },
+        {
+            "type": "go",
+            "name": "RT-KCSM listening on UNIX socket",
+            "request": "launch",
+            "program": "${workspaceFolder}/code/rtkcsm/src/main.go",
+            "args": [
+                "--server", ":8081",
+                "--reader", "suricata",
+                "--transport", "unix",
+                "--file", "/tmp/suricata.sock",
+                "--profile", "progress=1"
+            ]
         }
     ]
 }

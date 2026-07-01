@@ -84,7 +84,7 @@ type OCSFRelatedEvent struct {
 	ID                 string               `json:"uid"`
 	Type               OCSFType             `json:"type_uid"`
 	KillChainPhases    []OCSFKillChainPhase `json:"kill_chain"`
-	FirstSeenTimestamp int                  `json:"fist_seen_time"`
+	FirstSeenTimestamp int                  `json:"first_seen_time"`
 	Count              int                  `json:"count"`
 	Description        string               `json:"desc"`
 	Observables        []OCSFObservable     `json:"observables"`
@@ -95,8 +95,14 @@ type OCSFFindingInformation struct {
 	RelatedEvents []OCSFRelatedEvent `json:"related_events"`
 }
 
+type OCSFUser struct {
+	Name string   `json:"name"`
+	Type OCSFType `json:"type_id"`
+}
+
 type OCSFIncidentFinding struct {
 	OCSFBase
+	Assignee            OCSFUser                 `json:"assignee"`
 	FindingInformations []OCSFFindingInformation `json:"finding_info_list"`
 }
 
@@ -179,13 +185,17 @@ func FromGraphToOCSFIncidentFinding[T structure.Stage](graph *structure.PreCompu
 			Category:  OCSFCategoryFindings,
 			Timestamp: int(time.Now().UnixMilli()),
 			Metadata: OCSFMetadata{
-				Version: "1.0",
+				Version: "1.8.0",
 				Product: OCSFProduct{
 					Name: "RT-KCSM",
 				},
 			},
 			Severity: severity,
 			Status:   OCSFStatusNew,
+		},
+		Assignee: OCSFUser{
+			Name: "RT-KCSM",
+			Type: 99,
 		},
 		FindingInformations: findings,
 	}
