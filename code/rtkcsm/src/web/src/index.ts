@@ -1,6 +1,7 @@
 import DirectedGraph from "graphology"
 import FA2Layout from "graphology-layout-forceatlas2/worker"
 import Sigma from "sigma"
+import { fitViewportToNodes } from "@sigma/utils"
 import { EdgeCurvedArrowProgram, DEFAULT_EDGE_CURVATURE, indexParallelEdgesIndex } from "@sigma/edge-curve"
 import { LoopEdgeProgram } from "./LoopEdge"
 import { EdgeArrowProgram } from "sigma/rendering"
@@ -205,14 +206,18 @@ function renderLoop() {
 }
 renderLoop()
 
-function centerView() {
-    renderer.getCamera().animate(
-        { x: 0.5, y: 0.5, ratio: 1 },
-        { duration: 300 }
-    )
+function centerView(...nodes: Array<string>) {
+    if(nodes.length > 0 ) {
+        fitViewportToNodes(renderer, nodes)
+    } else {
+        renderer.getCamera().animate(
+            { x: 0.5, y: 0.5, ratio: 1 },
+            { duration: 300 }
+        )
+    }
 }
 
-function computeXYCoordinateFromString(str: string): [Number, Number] {
+function computeXYCoordinateFromString(str: string): [number, number] {
   let hashA = 0
   let hashB = 0
 
@@ -279,7 +284,7 @@ function openGraph(id: number) {
                 }
 
                 if (!(edge.to in nodesDict)) {
-                    const [x, y] = computeXYCoordinateFromString(edge.from)
+                    const [x, y] = computeXYCoordinateFromString(edge.to)
 
                     graph.addNode(
                         edge.to,
@@ -509,7 +514,8 @@ function addAlertToList(relation: any, parent: HTMLElement) {
         }
         focusedAlertId = relation.id
         graph.setEdgeAttribute(relation.id, "highlight", true)
-        centerView()
+        console.log(relation)
+        centerView(relation.from, relation.to)
     })
 
     parent.appendChild(alertElement)
@@ -626,7 +632,9 @@ document.querySelector(".sidebar .controls .reset")?.addEventListener("click", r
 document.querySelector(".sidebar .controls .hosts")?.addEventListener("click", openHostModal)
 document.querySelector(".modal .close")?.addEventListener("click", closeHostModal)
 document.querySelector(".modal .create-host .button")?.addEventListener("click", createHost)
-centerViewButton.addEventListener("click", centerView)
+centerViewButton.addEventListener("click", () => {
+    centerView()
+})
 exportToOCSFButton.addEventListener("click", downloadOCSFExport)
 
 refreshGraphs()
