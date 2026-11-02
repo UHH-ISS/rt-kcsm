@@ -11,7 +11,7 @@ export default {
         file: "../static/bundle.js",
         inlineDynamicImports: true
     },
-    context: "window", 
+    context: "window",
     plugins: [
         nodePolyfills(),
         resolve({

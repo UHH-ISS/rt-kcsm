@@ -19,9 +19,10 @@ type RTKCSMImplementation[T structure.Stage, K structure.Stage] struct {
 	profilerOptions *structure.ProfilerOptions
 	stageMapper     structure.StageMapper[T]
 	stateMachine    structure.StateMachine[T, K]
+	eventManager    *structure.EventManager[T]
 }
 
-func NewIncrementalRTKCSM[T structure.Stage, K structure.Stage](stageMapper structure.StageMapper[T], stateMachine structure.StateMachine[T, K], profilerOptions *structure.ProfilerOptions) *RTKCSMImplementation[T, K] {
+func NewRTKCSM[T structure.Stage, K structure.Stage](stageMapper structure.StageMapper[T], stateMachine structure.StateMachine[T, K], profilerOptions *structure.ProfilerOptions) *RTKCSMImplementation[T, K] {
 	var sortedGraphs structure.SortedMap[structure.GraphID, float32]
 	sortedGraphs = structure.NewWriteEfficientSortedMap[structure.GraphID, float32](true)
 	if profilerOptions.Has(structure.GraphRankingProfilerOptionFlag) {
@@ -36,6 +37,7 @@ func NewIncrementalRTKCSM[T structure.Stage, K structure.Stage](stageMapper stru
 		profilerOptions: profilerOptions,
 		stageMapper:     stageMapper,
 		stateMachine:    stateMachine,
+		eventManager:    structure.NewEventManager[T](),
 	}
 
 	return &rtkcsm
@@ -157,12 +159,13 @@ func (c *RTKCSMImplementation[T, K]) processRelation(alert structure.EnrichedAle
 		}
 
 	}
-	relation := graph.Append(alert)
+	relation := graph.Append(&alert)
 
 	// update sorted graphs
 	c.sortedGraphs.Insert(graphId, graph.Relevance())
 
-	c.lookup.AddRelation(&relation, graphId, graph)
+	c.lookup.AddRelation(relation, graphId, graph)
+	c.eventManager.Publish(graphId, relation)
 
 	// Get position of correct graph for eval
 	if c.profilerOptions.Has(structure.GraphRankingProfilerOptionFlag) {
@@ -264,4 +267,12 @@ func (c *RTKCSMImplementation[T, K]) AddHostRisk(address structure.IPAddress, ri
 func (c *RTKCSMImplementation[T, K]) DeleteHostRisk(address structure.IPAddress) {
 	structure.HostManager.DeleteHostRiskLevel(address)
 	c.recomputeGraphRelevances()
+}
+
+func (c *RTKCSMImplementation[T, K]) Subscribe(graphId structure.GraphID, subscriber chan *structure.GraphAddEdgeEvent[T]) structure.SubscriberHandle {
+	return c.eventManager.Subscribe(graphId, subscriber)
+}
+
+func (c *RTKCSMImplementation[T, K]) Unsubscribe(handle structure.SubscriberHandle) {
+	c.eventManager.Unsubscribe(handle)
 }

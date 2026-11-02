@@ -12,7 +12,7 @@ import (
 var profilerOptions = structure.NewProfilerOptions()
 
 func TestGraphGeneration(t *testing.T) {
-	rtkcsm := behaviour.NewIncrementalRTKCSM(1, structure.NewSimplifiedUKCStageMapper(), structure.NewUKCStateMachine[structure.SimplifiedUKCStage](), &profilerOptions)
+	rtkcsm := behaviour.NewRTKCSM(structure.NewSimplifiedUKCStageMapper(), structure.NewUKCStateMachine[structure.SimplifiedUKCStage](), &profilerOptions)
 
 	seconds := time.Now().Unix()
 
@@ -113,7 +113,7 @@ func TestGraphGeneration(t *testing.T) {
 }
 
 func TestGraphGenerationSpecialGraph(t *testing.T) {
-	rtkcsm := behaviour.NewIncrementalRTKCSM(1, structure.NewSimplifiedUKCStageMapper(), structure.NewUKCStateMachine[structure.SimplifiedUKCStage](), &profilerOptions)
+	rtkcsm := behaviour.NewRTKCSM(structure.NewSimplifiedUKCStageMapper(), structure.NewUKCStateMachine[structure.SimplifiedUKCStage](), &profilerOptions)
 
 	seconds := time.Now().Unix()
 
@@ -155,7 +155,7 @@ func TestGraphGenerationSpecialGraph(t *testing.T) {
 }
 
 func TestGraphGenerationComplexAttack(t *testing.T) {
-	rtkcsm := behaviour.NewIncrementalRTKCSM(1, structure.NewSimplifiedUKCStageMapper(), structure.NewUKCStateMachine[structure.SimplifiedUKCStage](), &profilerOptions)
+	rtkcsm := behaviour.NewRTKCSM(structure.NewSimplifiedUKCStageMapper(), structure.NewUKCStateMachine[structure.SimplifiedUKCStage](), &profilerOptions)
 
 	seconds := time.Now().Unix()
 

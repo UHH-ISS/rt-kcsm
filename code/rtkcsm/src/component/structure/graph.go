@@ -89,7 +89,7 @@ type OptimizedDirectedRelation[T Stage] struct {
 	Cause     string
 }
 
-func NewOptimizedDirectedRelation[T Stage](relation DirectedRelation[T]) (OptimizedDirectedRelation[T], OptimizedDirectedRelationID) {
+func NewOptimizedDirectedRelation[T Stage](relation *DirectedRelation[T]) (OptimizedDirectedRelation[T], OptimizedDirectedRelationID) {
 
 	return OptimizedDirectedRelation[T]{
 		MetaStage: relation.MetaStage,
@@ -203,8 +203,8 @@ func (g *Graph[T, K]) GetRelations() []DirectedRelation[T] {
 	return relations
 }
 
-func (g *Graph[T, K]) Append(r EnrichedAlert[T]) DirectedRelation[T] {
-	relation := DirectedRelation[T]{
+func (g *Graph[T, K]) Append(r *EnrichedAlert[T]) *DirectedRelation[T] {
+	relation := &DirectedRelation[T]{
 		SrcNode:     r.SourceIP,
 		DstNode:     r.DestinationIP,
 		Severity:    r.Severity,
@@ -220,7 +220,7 @@ func (g *Graph[T, K]) Append(r EnrichedAlert[T]) DirectedRelation[T] {
 	return relation
 }
 
-func (g *Graph[T, K]) append(r DirectedRelation[T]) {
+func (g *Graph[T, K]) append(r *DirectedRelation[T]) {
 	g.relationsMutex.Lock()
 	defer g.relationsMutex.Unlock()
 
@@ -241,8 +241,8 @@ func (g *Graph[T, K]) append(r DirectedRelation[T]) {
 		g.ComputedRelevance += (relationRelevance - existingMaxStageRelevance) * relation.MetaStage.GetWeight()
 	}
 
-	g.updatePredecessor(r.SrcNode, r.SrcNode.IsInternal() && r.DstNode.IsInternal() && !r.DstNode.Equal(r.SrcNode), r.SrcNode.IsInternal())
-	g.updatePredecessor(r.DstNode, false, false)
+	g.updatePredecessor(r.DstNode, r.DstNode.IsInternal() && r.SrcNode.IsInternal() && !r.SrcNode.Equal(r.DstNode), r.DstNode.IsInternal())
+	g.updatePredecessor(r.SrcNode, false, false)
 }
 
 func (g *Graph[T, K]) updatePredecessor(address IPAddress, hasLateralMovement bool, hasOutgoingActivity bool) {
@@ -376,7 +376,7 @@ func (g *Graph[T, K]) Merge(otherGraph *Graph[T, K], oldGraphID GraphID, newGrap
 
 type PreComputedDirectedRelation[T Stage] struct {
 	ID string `json:"id"`
-	DirectedRelationJson[T]
+	DirectedRelationGroup[T]
 	ComputedHostRelevance float32    `json:"computed_host_relevance"`
 	ConfirmedStages       []UKCStage `json:"confirmed_ukc_stages"`
 	FromIsInternal        bool       `json:"from_is_internal"`
@@ -407,7 +407,7 @@ func (r *OptimizedDirectedRelation[T]) getConfirmedStages(hasLateralMovement boo
 	return confirmedStages
 }
 
-func (r *OptimizedDirectedRelation[T]) GetPreComputed(stages []UKCStage, count int, id OptimizedDirectedRelationID) PreComputedDirectedRelation[T] {
+func (r *OptimizedDirectedRelation[T]) GetPreComputed(stages []UKCStage, id OptimizedDirectedRelationID) PreComputedDirectedRelation[T] {
 	src := id.GetSrc()
 	dst := id.GetDst()
 	relevance := id.Relevance()
@@ -419,7 +419,7 @@ func (r *OptimizedDirectedRelation[T]) GetPreComputed(stages []UKCStage, count i
 
 	return PreComputedDirectedRelation[T]{
 		ID: base64.StdEncoding.EncodeToString(id[:]),
-		DirectedRelationJson: DirectedRelationJson[T]{
+		DirectedRelationGroup: DirectedRelationGroup[T]{
 			From:        src.String(),
 			To:          dst.String(),
 			MetaStage:   r.MetaStage,
@@ -429,7 +429,7 @@ func (r *OptimizedDirectedRelation[T]) GetPreComputed(stages []UKCStage, count i
 			SignatureId: id.GetSignatureId(),
 			Cause:       r.Cause,
 			Labels:      r.GetLabels(),
-			Count:       count,
+			Count:       r.Count,
 		},
 		ComputedHostRelevance: relevance * float32(HostManager.GetHostRiskLevel(victim)),
 		ConfirmedStages:       stages,
@@ -467,14 +467,12 @@ func (g *Graph[T, K]) GetPreComputed() PreComputedGraph[T] {
 
 	g.relationsMutex.RLock()
 	for id, relation := range g.Relations {
-		count := relation.Count
-
 		srcEntry := g.reverseLookup[id.GetSrc()]
 		dstEntry := g.reverseLookup[id.GetDst()]
 
 		stages := relation.getConfirmedStages(srcEntry.HasLateralMovement, dstEntry.HasOutgoingActivity)
 
-		graph.PreComputedDirectedRelations = append(graph.PreComputedDirectedRelations, relation.GetPreComputed(stages, count, id))
+		graph.PreComputedDirectedRelations = append(graph.PreComputedDirectedRelations, relation.GetPreComputed(stages, id))
 	}
 	g.relationsMutex.RUnlock()
 
@@ -484,8 +482,8 @@ func (g *Graph[T, K]) GetPreComputed() PreComputedGraph[T] {
 }
 
 type GraphJson[T Stage] struct {
-	Relations         []DirectedRelationJson[T] `json:"relations"`
-	ComputedRelevance float32                   `json:"computed_relevance"`
+	Relations         []DirectedRelationGroup[T] `json:"relations"`
+	ComputedRelevance float32                    `json:"computed_relevance"`
 }
 
 func (g *Graph[T, K]) MarshalJSON() ([]byte, error) {
@@ -495,7 +493,7 @@ func (g *Graph[T, K]) MarshalJSON() ([]byte, error) {
 	graph := GraphJson[T]{}
 
 	for id, relation := range g.Relations {
-		graph.Relations = append(graph.Relations, DirectedRelationJson[T]{
+		graph.Relations = append(graph.Relations, DirectedRelationGroup[T]{
 			From:        id.GetSrc().String(),
 			To:          id.GetDst().String(),
 			Timestamp:   relation.Timestamp.UnixMilli(),
@@ -527,7 +525,7 @@ func (g *Graph[T, K]) UnmarshalJSON(data []byte) error {
 	g.Relations = map[OptimizedDirectedRelationID]OptimizedDirectedRelation[T]{}
 
 	for _, relation := range jsonObject.Relations {
-		g.append(DirectedRelation[T]{
+		g.append(&DirectedRelation[T]{
 			SrcNode:     ParseIPAddress(relation.From),
 			DstNode:     ParseIPAddress(relation.To),
 			Timestamp:   time.UnixMilli(relation.Timestamp),

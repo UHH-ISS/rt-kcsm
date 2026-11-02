@@ -13,9 +13,12 @@
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@types/events": "^3.0.3",
-    "rollup": "^4.60.4",
+    "rollup": "^4.67.4",
     "rollup-plugin-polyfill-node": "^0.13.0",
     "typescript": "^6.0.3"
   },
-  "type": "module"
+  "type": "module",
+  "allowScripts": {
+    "fsevents@2.3.3": true
+  }
 }

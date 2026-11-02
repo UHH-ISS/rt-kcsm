@@ -142,7 +142,7 @@ func main() {
 		structure.SimplifiedUkcStageWeights[structure.NewSimplifiedUKCStageFromString(stage)] = weight
 	}
 
-	rtkcsm := behaviour.NewIncrementalRTKCSM(structure.NewSimplifiedUKCStageMapper(), structure.NewUKCStateMachine[structure.SimplifiedUKCStage](), &profilerOptions)
+	rtkcsm := behaviour.NewRTKCSM(structure.NewSimplifiedUKCStageMapper(), structure.NewUKCStateMachine[structure.SimplifiedUKCStage](), &profilerOptions)
 
 	startTime := time.Now()
 	if config.ImportGraphsFile != "" {

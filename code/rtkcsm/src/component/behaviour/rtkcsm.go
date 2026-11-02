@@ -15,4 +15,6 @@ type RTKCSM[T structure.Stage, K structure.Stage] interface {
 	ImportGraphs(reader io.Reader) error
 	ExportGraphs(writer io.Writer) (int, error)
 	Reset()
+	Subscribe(graphId structure.GraphID, subscriber chan *structure.GraphAddEdgeEvent[T]) structure.SubscriberHandle
+	Unsubscribe(handle structure.SubscriberHandle)
 }

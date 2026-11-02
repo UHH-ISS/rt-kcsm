@@ -12,7 +12,20 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/gorilla/websocket"
 )
+
+type Action int
+
+const (
+	SuscribeAction    Action = 1
+	UnsubscribeAction Action = 2
+)
+
+type WebsocketMessage struct {
+	Action  Action            `json:"action"`
+	GraphID structure.GraphID `json:"graph_id"`
+}
 
 func Start[T structure.Stage, K structure.Stage](listenAddress string, rtkcsm behaviour.RTKCSM[T, K], fileSystem fs.FS) error {
 	server := gin.New()
@@ -93,6 +106,59 @@ func Start[T structure.Stage, K structure.Stage](listenAddress string, rtkcsm be
 		} else {
 			ctx.Writer.WriteHeader(http.StatusNotFound)
 		}
+	})
+
+	upgrader := websocket.Upgrader{}
+
+	server.GET("/websocket", func(c *gin.Context) {
+		connection, err := upgrader.Upgrade(c.Writer, c.Request, nil)
+		if err != nil {
+			return
+		}
+		defer connection.Close()
+
+		var queue = make(chan *structure.GraphAddEdgeEvent[T])
+		var handle *structure.SubscriberHandle
+
+		go func() {
+			for {
+				event, ok := <-queue
+				if !ok {
+					break
+				}
+
+				message, err := json.Marshal(event)
+				if err == nil {
+					connection.WriteMessage(websocket.BinaryMessage, message)
+				}
+			}
+		}()
+
+		for {
+			_, message, err := connection.ReadMessage()
+			if err != nil {
+				break
+			}
+
+			websocketMessage := WebsocketMessage{}
+			json.Unmarshal(message, &websocketMessage)
+			if websocketMessage.Action == SuscribeAction || websocketMessage.Action == UnsubscribeAction {
+				if handle != nil {
+					rtkcsm.Unsubscribe(*handle)
+				}
+
+				if websocketMessage.Action == SuscribeAction {
+					handleInstance := rtkcsm.Subscribe(websocketMessage.GraphID, queue)
+					handle = &handleInstance
+				}
+			}
+		}
+
+		if handle != nil {
+			rtkcsm.Unsubscribe(*handle)
+		}
+
+		close(queue)
 	})
 
 	log.Printf("Visit the web UI at: http://%s/web/", listenAddress)

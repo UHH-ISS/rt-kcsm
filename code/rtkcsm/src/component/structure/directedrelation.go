@@ -7,8 +7,8 @@ import (
 type DirectedRelationID string
 
 type DirectedRelation[T Stage] struct {
-	DstNode   IPAddress
-	SrcNode   IPAddress
+	DstNode   IPAddress `json:"from"`
+	SrcNode   IPAddress `json:"to"`
 	Timestamp time.Time
 	MetaStage T
 
@@ -19,7 +19,7 @@ type DirectedRelation[T Stage] struct {
 	Labels      []string
 }
 
-type DirectedRelationJson[T Stage] struct {
+type DirectedRelationGroup[T Stage] struct {
 	From        string   `json:"from"`
 	To          string   `json:"to"`
 	MetaStage   T        `json:"stage"`

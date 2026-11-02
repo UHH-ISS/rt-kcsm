@@ -36,6 +36,33 @@ const stageNamesToSymbols: { [stageName: string]: string } = {
     "Execution": "X"
 }
 
+enum Action {
+  Subscribe = 1,
+  Unsubscribe = 2
+}
+
+interface WebsocketActionMessage {
+    action: Action
+    graph_id: number
+}
+
+interface WebsocketGraphEvent {
+  graph_id: number
+  relation: WebsocketGraphEventRelation
+}
+
+interface WebsocketGraphEventRelation {
+  from: string;
+  to: string;
+  timestamp: number;
+  meta_stage: number;
+  severity: number;
+  confidence: number;
+  signature_id: number;
+  cause: string;
+  labels: string[];
+}
+
 const riskLevels = [{
     name: "low",
     value: 0.5
@@ -49,6 +76,30 @@ const riskLevels = [{
 
 let currentGraphId: number | null = null
 let focusedAlertId: string | null = null
+
+let websocket: WebSocket
+let lastUpdateTimeout: ReturnType<typeof setTimeout> | null = null
+
+function connectToWebsocket() {
+  websocket = new WebSocket("/websocket")
+
+  websocket.addEventListener("message", () => {
+    if (lastUpdateTimeout == null) {
+      lastUpdateTimeout = setTimeout(() => {
+        if (currentGraphId != null) {
+          openGraph(Number(currentGraphId))
+        }
+        lastUpdateTimeout = null
+      }, 1000)
+    }
+  })
+
+  websocket.addEventListener("close", () => {
+    setTimeout(connectToWebsocket, 2000)
+  })
+}
+
+connectToWebsocket()
 
 const graph = new DirectedGraph({ multi: true, allowSelfLoops: true })
 const renderer = new Sigma(graph, graphContainer, {
@@ -250,6 +301,11 @@ function openGraph(id: number) {
         selectedGraphElement.classList.add("active")
     }
 
+    const message: WebsocketActionMessage = {
+      action: Action.Subscribe,
+      graph_id: id
+    }
+    websocket.send(JSON.stringify(message))
 
     graphIdElement.textContent = String(id)
     alertsListElement.innerHTML = ""
@@ -299,7 +355,7 @@ function openGraph(id: number) {
                     )
                     nodesDict[edge.to] = true
                 }
-                    
+
                 graph.addEdgeWithKey(
                     edge.id,
                     edge.from,
@@ -410,7 +466,7 @@ function addDateSeparator(timestamp: Date): HTMLElement {
     const dateLabelElement = document.createElement("summary")
     dateLabelElement.textContent = timestamp.toLocaleDateString()
     dateElement.appendChild(dateLabelElement)
-    
+
     const alertsDetailsElement = document.createElement("div")
     alertsDetailsElement.role = "list"
     dateElement.appendChild(alertsDetailsElement)
