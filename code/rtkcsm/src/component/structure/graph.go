@@ -16,6 +16,10 @@ type GraphID int
 
 var nextGraphID GraphID = 0
 
+func ResetGraphID() {
+	nextGraphID = 0
+}
+
 func NextGraphID() GraphID {
 	nextGraphID += 1
 	return nextGraphID

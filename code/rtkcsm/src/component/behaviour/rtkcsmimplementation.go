@@ -95,6 +95,7 @@ func (c *RTKCSMImplementation[T, K]) Reset() {
 	c.graphs = map[structure.GraphID]*structure.Graph[T, K]{}
 	c.lookup = structure.NewLookupTable(c.stateMachine)
 	c.sortedGraphs = structure.NewWriteEfficientSortedMap[structure.GraphID, float32](true)
+	structure.ResetGraphID()
 }
 
 func (c *RTKCSMImplementation[T, K]) AddAlert(alert structure.Alert) error {
