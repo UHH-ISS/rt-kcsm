@@ -245,8 +245,8 @@ func (g *Graph[T, K]) append(r *DirectedRelation[T]) {
 		g.ComputedRelevance += (relationRelevance - existingMaxStageRelevance) * relation.MetaStage.GetWeight()
 	}
 
-	g.updatePredecessor(r.DstNode, false, r.DstNode.IsInternal())
-	g.updatePredecessor(r.SrcNode, r.DstNode.IsInternal() && r.SrcNode.IsInternal() && !r.SrcNode.Equal(r.DstNode), false)
+	g.updatePredecessor(r.DstNode, false, false)
+	g.updatePredecessor(r.SrcNode, r.SrcNode.IsInternal() && r.DstNode.IsInternal() && !r.SrcNode.Equal(r.DstNode), r.SrcNode.IsInternal())
 }
 
 func (g *Graph[T, K]) updatePredecessor(address IPAddress, hasLateralMovement bool, hasOutgoingActivity bool) {
