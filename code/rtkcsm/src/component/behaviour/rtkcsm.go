@@ -7,7 +7,7 @@ import (
 
 type RTKCSM[T structure.Stage, K structure.Stage] interface {
 	AddAlert(alert structure.Alert) error
-	GetGraphList(limit int) structure.GraphInformationList
+	GetGraphList(page int) structure.GraphInformationList
 	GetGraph(id structure.GraphID) *structure.Graph[T, K]
 	GetHostRisks() []structure.HostRisk
 	AddHostRisk(address structure.IPAddress, riskLevel structure.RiskLevel)
