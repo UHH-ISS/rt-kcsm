@@ -1,6 +1,9 @@
 package structure
 
-import "errors"
+import (
+	"errors"
+	"sort"
+)
 
 type SimplifiedUKCStage int
 
@@ -66,30 +69,49 @@ func (stage SimplifiedUKCStage) ToUKCStages() []UKCStage {
 	return ukcStageMapping[stage]
 }
 
-func IncomingStage(source IPAddress, destination IPAddress) bool {
+func IncomingStage(source *IPAddress, destination *IPAddress) bool {
 	return !source.IsInternal() && destination.IsInternal()
 }
 
-func HostStage(source IPAddress, destination IPAddress) bool {
+func HostStage(source *IPAddress, destination *IPAddress) bool {
 	return source.Equal(destination)
 }
 
-func InternalDifferentSubnetStage(source IPAddress, destination IPAddress) bool {
-	return source.IsInternal() && destination.IsInternal() && !source.IsSameSubnet(destination)
-}
-
-func InternalSameSubnetStage(source IPAddress, destination IPAddress) bool {
+func InternalStage(source *IPAddress, destination *IPAddress) bool {
 	return source.IsInternal() && destination.IsInternal()
 }
 
-func OutgoingStage(source IPAddress, destination IPAddress) bool {
+func SameNetwork(sourceNetwork *IPNetwork, destinationNetwork *IPNetwork) bool {
+	return sourceNetwork != nil && destinationNetwork != nil && sourceNetwork.Equal(destinationNetwork)
+}
+
+func OutgoingStage(source *IPAddress, destination *IPAddress) bool {
 	return source.IsInternal() && !destination.IsInternal()
 }
 
-type SimplifiedUKCStageMapper struct{}
+type SimplifiedUKCStageMapper struct {
+	internalNetworks IPNetworks
+}
 
-func NewSimplifiedUKCStageMapper() StageMapper[SimplifiedUKCStage] {
-	return &SimplifiedUKCStageMapper{}
+func NewSimplifiedUKCStageMapper(internalNetworkStrings ...string) StageMapper[SimplifiedUKCStage] {
+	internalNetworks := IPNetworks{}
+
+	if len(internalNetworkStrings) == 0 {
+		internalNetworks = append(internalNetworks, ParseIPNetwork("192.168.0.0/16"))
+		internalNetworks = append(internalNetworks, ParseIPNetwork("172.16.0.0/12"))
+		internalNetworks = append(internalNetworks, ParseIPNetwork("10.0.0.0/8"))
+		internalNetworks = append(internalNetworks, ParseIPNetwork("fc00::/7"))
+	} else {
+		for _, internalNetwork := range internalNetworkStrings {
+			internalNetworks = append(internalNetworks, ParseIPNetwork(internalNetwork))
+		}
+	}
+
+	sort.Sort(sort.Reverse(internalNetworks))
+
+	return &SimplifiedUKCStageMapper{
+		internalNetworks: internalNetworks,
+	}
 }
 
 var errSimplifiedUkcStageMapperNotFound = errors.New("not found")
@@ -102,18 +124,38 @@ var simplifiedUkcPrecedingStages = map[SimplifiedUKCStage][]SimplifiedUKCStage{
 	Outgoing:      {Incoming, SameZone, Host, DifferentZone, Outgoing, Host},
 }
 
-func (SimplifiedUKCStageMapper) DetermineStage(alert Alert) (SimplifiedUKCStage, error) {
-	source := alert.SourceIP
-	destination := alert.DestinationIP
+func (mapper *SimplifiedUKCStageMapper) DetermineStage(alert *Alert) (SimplifiedUKCStage, error) {
+	source := &alert.SourceIP
+	var sourceNetwork *IPNetwork = nil
+	destination := &alert.DestinationIP
+	var destinationNetwork *IPNetwork = nil
+
+	for _, internalNetwork := range mapper.internalNetworks {
+		if internalNetwork.HasIpAddress(source) {
+			source.SetInternal(true)
+			sourceNetwork = &internalNetwork
+			break
+		}
+	}
+
+	for _, internalNetwork := range mapper.internalNetworks {
+		if internalNetwork.HasIpAddress(destination) {
+			destination.SetInternal(true)
+			destinationNetwork = &internalNetwork
+			break
+		}
+	}
 
 	if IncomingStage(source, destination) {
 		return Incoming, nil
 	} else if HostStage(source, destination) {
 		return Host, nil
-	} else if InternalDifferentSubnetStage(source, destination) {
-		return DifferentZone, nil
-	} else if InternalSameSubnetStage(source, destination) {
-		return SameZone, nil
+	} else if InternalStage(source, destination) {
+		if SameNetwork(sourceNetwork, destinationNetwork) {
+			return SameZone, nil
+		} else {
+			return DifferentZone, nil
+		}
 	} else if OutgoingStage(source, destination) {
 		return Outgoing, nil
 	} else {
@@ -121,6 +163,6 @@ func (SimplifiedUKCStageMapper) DetermineStage(alert Alert) (SimplifiedUKCStage,
 	}
 }
 
-func (SimplifiedUKCStageMapper) GetPrecedingStages(stage SimplifiedUKCStage) []SimplifiedUKCStage {
+func (mapper SimplifiedUKCStageMapper) GetPrecedingStages(stage SimplifiedUKCStage) []SimplifiedUKCStage {
 	return simplifiedUkcPrecedingStages[stage]
 }

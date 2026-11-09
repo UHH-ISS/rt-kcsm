@@ -34,6 +34,7 @@ type configuration struct {
 	ProfilerGraphID            structure.GraphID  `arg:"--profile-graph-ranking-id" help:"graph id for profiling ranking"`
 	StageWeights               map[string]float32 `arg:"--stage-weight" help:"set custom stage weights (incoming, same-zone, different-zone, outgoing): --stage-weight incoming=0.1"`
 	ProfilerLogResolution      int                `arg:"--profile-log-resolution" help:"resolution of updating alert count" default:"1000"`
+	InternalNetworks           []string           `arg:"--internal-network" help:"internal networks"`
 }
 
 func startCPUProfile(fileName string) *os.File {
@@ -142,7 +143,7 @@ func main() {
 		structure.SimplifiedUkcStageWeights[structure.NewSimplifiedUKCStageFromString(stage)] = weight
 	}
 
-	rtkcsm := behaviour.NewRTKCSM(structure.NewSimplifiedUKCStageMapper(), structure.NewUKCStateMachine[structure.SimplifiedUKCStage](), &profilerOptions)
+	rtkcsm := behaviour.NewRTKCSM(structure.NewSimplifiedUKCStageMapper(config.InternalNetworks...), structure.NewUKCStateMachine[structure.SimplifiedUKCStage](), &profilerOptions)
 
 	startTime := time.Now()
 	if config.ImportGraphsFile != "" {

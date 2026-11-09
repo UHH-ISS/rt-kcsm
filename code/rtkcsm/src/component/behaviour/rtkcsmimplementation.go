@@ -108,7 +108,7 @@ func (c *RTKCSMImplementation[T, K]) AddAlert(alert structure.Alert) error {
 
 func (c *RTKCSMImplementation[T, K]) processStages(alert structure.Alert) error {
 	if !alert.SourceIP.IsUnspecified() && !alert.DestinationIP.IsUnspecified() {
-		metaStage, err := c.stageMapper.DetermineStage(alert)
+		metaStage, err := c.stageMapper.DetermineStage(&alert)
 		if err == nil {
 			relation := structure.EnrichedAlert[T]{
 				Alert:     alert,

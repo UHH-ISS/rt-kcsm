@@ -37,30 +37,13 @@ const stageNamesToSymbols: { [stageName: string]: string } = {
 }
 
 enum Action {
-  Subscribe = 1,
-  Unsubscribe = 2
+    Subscribe = 1,
+    Unsubscribe = 2
 }
 
 interface WebsocketActionMessage {
     action: Action
     graph_id: number
-}
-
-interface WebsocketGraphEvent {
-  graph_id: number
-  relation: WebsocketGraphEventRelation
-}
-
-interface WebsocketGraphEventRelation {
-  from: string;
-  to: string;
-  timestamp: number;
-  meta_stage: number;
-  severity: number;
-  confidence: number;
-  signature_id: number;
-  cause: string;
-  labels: string[];
 }
 
 const riskLevels = [{
@@ -81,22 +64,39 @@ let websocket: WebSocket
 let lastUpdateTimeout: ReturnType<typeof setTimeout> | null = null
 
 function connectToWebsocket() {
-  websocket = new WebSocket("/websocket")
+    websocket = new WebSocket("/websocket")
 
-  websocket.addEventListener("message", () => {
-    if (lastUpdateTimeout == null) {
-      lastUpdateTimeout = setTimeout(() => {
-        if (currentGraphId != null) {
-          openGraph(Number(currentGraphId))
+    websocket.addEventListener("message", () => {
+        if (lastUpdateTimeout == null) {
+            lastUpdateTimeout = setTimeout(() => {
+                if (currentGraphId != null) {
+                  openGraph(Number(currentGraphId))
+                }
+                lastUpdateTimeout = null
+            }, 1000)
         }
-        lastUpdateTimeout = null
-      }, 1000)
-    }
-  })
+    })
 
-  websocket.addEventListener("close", () => {
-    setTimeout(connectToWebsocket, 2000)
-  })
+    websocket.addEventListener("close", () => {
+        setTimeout(connectToWebsocket, 2000)
+    })
+
+    websocket.addEventListener("open", () => {
+        if(currentGraphId) {
+            registerForGraphEvents(currentGraphId)
+        }
+    })
+}
+
+function registerForGraphEvents(id: number) {
+    if (websocket && websocket.OPEN) {
+        const message: WebsocketActionMessage = {
+          action: Action.Subscribe,
+          graph_id: id
+        }
+
+        websocket.send(JSON.stringify(message))
+    }
 }
 
 connectToWebsocket()
@@ -143,7 +143,16 @@ graphWrapper.addEventListener("mousemove", ({ clientX, clientY }) => {
         const target = graph.target(edgeId)
 
         alertSourceElement.textContent = source
+        alertDestinationElement.className = "src"
+        if (attributes.from_is_internal) {
+            alertSourceElement.classList.add("internal")
+        }
+
         alertDestinationElement.textContent = target
+        alertDestinationElement.className = "dst"
+        if (attributes.to_is_internal) {
+            alertDestinationElement.classList.add("internal")
+        }
 
         alertMessageElement.textContent = attributes.message
         alertPreviewElement.classList.remove("hide")
@@ -301,11 +310,7 @@ function openGraph(id: number) {
         selectedGraphElement.classList.add("active")
     }
 
-    const message: WebsocketActionMessage = {
-      action: Action.Subscribe,
-      graph_id: id
-    }
-    websocket.send(JSON.stringify(message))
+    registerForGraphEvents(id)
 
     graphIdElement.textContent = String(id)
     alertsListElement.innerHTML = ""
@@ -462,6 +467,7 @@ function addDateSeparator(timestamp: Date): HTMLElement {
     const dateElement = document.createElement("details")
     dateElement.className = "date-separator"
     dateElement.role = "listitem"
+    dateElement.open = true
 
     const dateLabelElement = document.createElement("summary")
     dateLabelElement.textContent = timestamp.toLocaleDateString()
@@ -565,12 +571,12 @@ function addAlertToList(relation: any, parent: HTMLElement) {
     alertElement.appendChild(detailsElement)
 
     alertElement.addEventListener("focusin", () => {
+        detailsElement.open = true
         if (focusedAlertId) {
             graph.removeEdgeAttribute(focusedAlertId, "highlight")
         }
         focusedAlertId = relation.id
         graph.setEdgeAttribute(relation.id, "highlight", true)
-        console.log(relation)
         centerView(relation.from, relation.to)
     })
 

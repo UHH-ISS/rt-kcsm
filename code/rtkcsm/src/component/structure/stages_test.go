@@ -7,7 +7,7 @@ import (
 )
 
 func TestGetPrecedingStages(t *testing.T) {
-	stageMapper := SimplifiedUKCStageMapper{}
+	stageMapper := NewSimplifiedUKCStageMapper()
 
 	testCases := []struct {
 		input    SimplifiedUKCStage
@@ -30,7 +30,7 @@ func TestGetPrecedingStages(t *testing.T) {
 }
 
 func TestDetermineStage(t *testing.T) {
-	stageMapper := SimplifiedUKCStageMapper{}
+	stageMapper := NewSimplifiedUKCStageMapper()
 	tests := []struct {
 		name       string
 		attackerIP IPAddress
@@ -71,7 +71,7 @@ func TestDetermineStage(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			result, err := stageMapper.DetermineStage(Alert{
+			result, err := stageMapper.DetermineStage(&Alert{
 				SourceIP:      tt.attackerIP,
 				DestinationIP: tt.victimIP,
 			})

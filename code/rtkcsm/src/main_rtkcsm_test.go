@@ -12,7 +12,10 @@ import (
 var profilerOptions = structure.NewProfilerOptions()
 
 func TestGraphGeneration(t *testing.T) {
-	rtkcsm := behaviour.NewRTKCSM(structure.NewSimplifiedUKCStageMapper(), structure.NewUKCStateMachine[structure.SimplifiedUKCStage](), &profilerOptions)
+	rtkcsm := behaviour.NewRTKCSM(structure.NewSimplifiedUKCStageMapper(
+		"172.31.64.0/24",
+		"172.31.0.0/16",
+	), structure.NewUKCStateMachine[structure.SimplifiedUKCStage](), &profilerOptions)
 
 	seconds := time.Now().Unix()
 

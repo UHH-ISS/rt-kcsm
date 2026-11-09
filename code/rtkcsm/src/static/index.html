@@ -56,9 +56,9 @@
             resize: horizontal;
             display: grid;
             grid-template-rows: auto auto 1fr;
-            min-width: 200px;
-            max-width: 350px;
-            width: 250px;
+            min-width: 150px;
+            max-width: 300px;
+            width: 180px;
             overflow: auto;
             grid-area: sidebar;
             border-right: 1px solid var(--border-color);
@@ -82,6 +82,10 @@
 
         .header .title {
             margin: 0px;
+        }
+
+        .sidebar .title {
+            margin: 0px 5px;
         }
 
         .header * {
@@ -285,7 +289,7 @@
         }
 
         .modal .input:focus-within {
-            border-color: var(--accent-color);  
+            border-color: var(--accent-color);
         }
 
         .modal .input select,
@@ -392,10 +396,12 @@
             resize: horizontal;
             border-left: 1px solid var(--border-color);
             min-width: fit-content;
-            width: 300px;
             grid-template-rows: auto 1fr auto;
             display: grid;
             overflow: auto;
+            width: 200px;
+            max-width: 400px;
+            min-width: 100px;
         }
 
         .alerts-panel h2 {
@@ -554,7 +560,7 @@
     </dialog>
     <main>
         <div class="sidebar" role="region">
-            <h2 class="title" role="heading">Scenario Graphs (<span class="graph-count"></span>)</h2>
+            <h2 class="title" role="heading">Attacks (<span class="graph-count"></span>)</h2>
             <div class="controls">
                 <button class="button refresh" tabindex="1">Refresh</button>
                 <button class="button reset" tabindex="2">Reset</button>
@@ -563,7 +569,7 @@
             <div class="list" role="list"></div>
         </div>
         <div class="header">
-            <p class="title" id="scenario-graph-name" role="heading">Scenario Graph #<span class="graph-id"></span></p>
+            <p class="title" id="scenario-graph-name" role="heading">Attack #<span class="graph-id"></span></p>
             <button class="button export-button" tabindex="4" disabled>Export to OCSF</button>
         </div>
         <div class="graph-wrapper" role="region" aria-labelledby="scenario-graph-name">
