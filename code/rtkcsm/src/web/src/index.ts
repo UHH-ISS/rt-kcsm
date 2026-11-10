@@ -62,18 +62,21 @@ let focusedAlertId: string | null = null
 
 let websocket: WebSocket
 let lastUpdateTimeout: ReturnType<typeof setTimeout> | null = null
+let updatesInQueue: number = 0
 
 function connectToWebsocket() {
     websocket = new WebSocket("/websocket")
 
-    websocket.addEventListener("message", () => {
+  websocket.addEventListener("message", () => {
+        updatesInQueue += 1
         if (lastUpdateTimeout == null) {
+            updatesInQueue = 0
             lastUpdateTimeout = setTimeout(() => {
                 if (currentGraphId != null) {
                   openGraph(Number(currentGraphId))
                 }
                 lastUpdateTimeout = null
-            }, 1000)
+            }, 100 + Math.min(10 * updatesInQueue, 900))
         }
     })
 
